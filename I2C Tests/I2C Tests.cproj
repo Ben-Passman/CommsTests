@@ -148,7 +148,16 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="i2c_master.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="i2c_master.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="main.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCP23X17.h">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>
