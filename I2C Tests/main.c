@@ -7,8 +7,6 @@
  *
  * Created: 13/10/2019 10:34:51 AM
  * Author : Ben
- * Version : 0.1
- * Last modified : 14/11/2019
 
 	ATTiny817
 	- 8kB Flash		0x8000	->	Program storage
@@ -28,7 +26,6 @@
 #define SLAVE1_ADDR 0x20
 
 uint8_t bytes[] = {	OLATA0, 0x67	}; // Need to initialise expander IO port before this will work. IODRA, 0x00
-I2C_data setup_data = {.byte_array = bytes, .size_byte_array = 2, .byte_count = 0};
 
 uint8_t system_init() 
 {
@@ -73,30 +70,14 @@ ISR(PORTC_PORT_vect)
 	// Debug	
 	PORTC.OUTTGL = PIN0_bm; 
 	
-	setup_data.byte_count = 0;
-	i2c_start(SLAVE1_ADDR, I2C_WRITE);
+	i2c_set_buffer(bytes, 2);
+	i2c_start(SLAVE1_ADDR, I2C_WRITE_bm);
 	bytes[1] = bytes[1] >> 7 | bytes[1] << 1;
 	
 	// Clear GPIO and setup timer for debug
 	TCA0.SINGLE.CTRLESET |= TCA_SPLIT_CMD_RESTART_gc;
 	TCA0.SINGLE.CTRLA |= TCA_SINGLE_ENABLE_bm;
 	VPORTA.OUT &= ~(PIN4_bm | PIN5_bm | PIN6_bm);
-}
-
-ISR(TWI0_TWIM_vect)
-{
-	// Debug, count i2c ops
-	VPORTA.OUT |= 0x10 << setup_data.byte_count;
-	
-	if (!(TWI0.MSTATUS & TWI_RXACK_bm) && (setup_data.byte_count < setup_data.size_byte_array))
-	{
-		i2c_write(*(setup_data.byte_array + setup_data.byte_count));
-		setup_data.byte_count ++;
-	} 
-	else
-	{
-		i2c_stop();
-	}
 }
 
 ISR(TCA0_OVF_vect) {
