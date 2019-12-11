@@ -3,31 +3,31 @@ I2C Tests.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         00000014  00803e00  00000298  0000032c  2**0
+  0 .data         00000016  00803e00  00000302  00000396  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         00000298  00000000  00000000  00000094  2**1
+  1 .text         00000302  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .bss          00000006  00803e14  00803e14  00000340  2**0
+  2 .bss          0000000b  00803e16  00803e16  000003ac  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  00000340  2**0
+  3 .comment      00000030  00000000  00000000  000003ac  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000370  2**2
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  000003dc  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 000000b8  00000000  00000000  000003ac  2**0
+  5 .debug_aranges 00000108  00000000  00000000  00000418  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   00002240  00000000  00000000  00000464  2**0
+  6 .debug_info   00002758  00000000  00000000  00000520  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00001891  00000000  00000000  000026a4  2**0
+  7 .debug_abbrev 000019dd  00000000  00000000  00002c78  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   000005de  00000000  00000000  00003f35  2**0
+  8 .debug_line   000007cc  00000000  00000000  00004655  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  000001d4  00000000  00000000  00004514  2**2
+  9 .debug_frame  000002b0  00000000  00000000  00004e24  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    000013ba  00000000  00000000  000046e8  2**0
+ 10 .debug_str    00001503  00000000  00000000  000050d4  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00000226  00000000  00000000  00005aa2  2**0
+ 11 .debug_loc    00000324  00000000  00000000  000065d7  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000098  00000000  00000000  00005cc8  2**0
+ 12 .debug_ranges 000000d8  00000000  00000000  000068fb  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -38,7 +38,7 @@ Disassembly of section .text:
    4:	32 c0       	rjmp	.+100    	; 0x6a <__bad_interrupt>
    6:	31 c0       	rjmp	.+98     	; 0x6a <__bad_interrupt>
    8:	30 c0       	rjmp	.+96     	; 0x6a <__bad_interrupt>
-   a:	0f c1       	rjmp	.+542    	; 0x22a <__vector_5>
+   a:	df c0       	rjmp	.+446    	; 0x1ca <__vector_5>
    c:	2e c0       	rjmp	.+92     	; 0x6a <__bad_interrupt>
    e:	2d c0       	rjmp	.+90     	; 0x6a <__bad_interrupt>
   10:	2c c0       	rjmp	.+88     	; 0x6a <__bad_interrupt>
@@ -54,7 +54,7 @@ Disassembly of section .text:
   24:	22 c0       	rjmp	.+68     	; 0x6a <__bad_interrupt>
   26:	21 c0       	rjmp	.+66     	; 0x6a <__bad_interrupt>
   28:	94 c0       	rjmp	.+296    	; 0x152 <__vector_20>
-  2a:	1f c0       	rjmp	.+62     	; 0x6a <__bad_interrupt>
+  2a:	17 c1       	rjmp	.+558    	; 0x25a <__vector_21>
   2c:	1e c0       	rjmp	.+60     	; 0x6a <__bad_interrupt>
   2e:	1d c0       	rjmp	.+58     	; 0x6a <__bad_interrupt>
   30:	1c c0       	rjmp	.+56     	; 0x6a <__bad_interrupt>
@@ -72,18 +72,18 @@ Disassembly of section .text:
   40:	1e e3       	ldi	r17, 0x3E	; 62
   42:	a0 e0       	ldi	r26, 0x00	; 0
   44:	be e3       	ldi	r27, 0x3E	; 62
-  46:	e8 e9       	ldi	r30, 0x98	; 152
-  48:	f2 e0       	ldi	r31, 0x02	; 2
+  46:	e2 e0       	ldi	r30, 0x02	; 2
+  48:	f3 e0       	ldi	r31, 0x03	; 3
   4a:	02 c0       	rjmp	.+4      	; 0x50 <__do_copy_data+0x10>
   4c:	05 90       	lpm	r0, Z+
   4e:	0d 92       	st	X+, r0
-  50:	a4 31       	cpi	r26, 0x14	; 20
+  50:	a6 31       	cpi	r26, 0x16	; 22
   52:	b1 07       	cpc	r27, r17
   54:	d9 f7       	brne	.-10     	; 0x4c <__do_copy_data+0xc>
 
 00000056 <__do_clear_bss>:
   56:	2e e3       	ldi	r18, 0x3E	; 62
-  58:	a4 e1       	ldi	r26, 0x14	; 20
+  58:	a6 e1       	ldi	r26, 0x16	; 22
   5a:	be e3       	ldi	r27, 0x3E	; 62
   5c:	01 c0       	rjmp	.+2      	; 0x60 <.do_clear_bss_start>
 
@@ -91,11 +91,11 @@ Disassembly of section .text:
   5e:	1d 92       	st	X+, r1
 
 00000060 <.do_clear_bss_start>:
-  60:	aa 31       	cpi	r26, 0x1A	; 26
+  60:	a1 32       	cpi	r26, 0x21	; 33
   62:	b2 07       	cpc	r27, r18
   64:	e1 f7       	brne	.-8      	; 0x5e <.do_clear_bss_loop>
-  66:	d8 d0       	rcall	.+432    	; 0x218 <main>
-  68:	15 c1       	rjmp	.+554    	; 0x294 <_exit>
+  66:	aa d0       	rcall	.+340    	; 0x1bc <main>
+  68:	4a c1       	rjmp	.+660    	; 0x2fe <_exit>
 
 0000006a <__bad_interrupt>:
   6a:	ca cf       	rjmp	.-108    	; 0x0 <__vectors>
@@ -117,7 +117,7 @@ static i2c_states_t I2C_M_IDLE(void)
 	// Writes to MSTATUS clear flags (CHECK).
 	
 	i2c_fsm.byte_count = 0;
-  70:	e4 e1       	ldi	r30, 0x14	; 20
+  70:	e6 e1       	ldi	r30, 0x16	; 22
   72:	fe e3       	ldi	r31, 0x3E	; 62
   74:	14 82       	std	Z+4, r1	; 0x04
 	TWI0.MADDR = i2c_fsm.slave_addr;
@@ -177,7 +177,7 @@ static i2c_states_t I2C_M_TX(void)
 	// Write to MDATA forces transmit, ignores ACKACT
 	// MDATA read/write clears interrupt flags, but not ARBLOST or BUSERR
 	TWI0.MDATA = *(i2c_fsm.byte_array + i2c_fsm.byte_count);
-  aa:	e4 e1       	ldi	r30, 0x14	; 20
+  aa:	e6 e1       	ldi	r30, 0x16	; 22
   ac:	fe e3       	ldi	r31, 0x3E	; 62
   ae:	84 81       	ldd	r24, Z+4	; 0x04
   b0:	a1 81       	ldd	r26, Z+1	; 0x01
@@ -207,7 +207,7 @@ static i2c_states_t I2C_M_RX(void)
 	// To send NACK, set ACKACT in MCTRLB to 1
 	*(i2c_fsm.byte_array + i2c_fsm.byte_count) = TWI0.MDATA;
   d0:	80 91 18 08 	lds	r24, 0x0818	; 0x800818 <__TEXT_REGION_LENGTH__+0x700818>
-  d4:	e4 e1       	ldi	r30, 0x14	; 20
+  d4:	e6 e1       	ldi	r30, 0x16	; 22
   d6:	fe e3       	ldi	r31, 0x3E	; 62
   d8:	94 81       	ldd	r25, Z+4	; 0x04
   da:	a1 81       	ldd	r26, Z+1	; 0x01
@@ -283,7 +283,7 @@ void i2c_state_isr (void)
 	{
 		i2c_fsm.state = I2C_NACK;
  110:	86 e0       	ldi	r24, 0x06	; 6
- 112:	80 93 19 3e 	sts	0x3E19, r24	; 0x803e19 <__data_end+0x5>
+ 112:	80 93 1b 3e 	sts	0x3E1B, r24	; 0x803e1b <__data_end+0x5>
 	}
 	
 	if (TWI0.MSTATUS & TWI_ARBLOST_bm)
@@ -293,7 +293,7 @@ void i2c_state_isr (void)
 	{
 		i2c_fsm.state = I2C_ARB_ERR;
  11e:	87 e0       	ldi	r24, 0x07	; 7
- 120:	80 93 19 3e 	sts	0x3E19, r24	; 0x803e19 <__data_end+0x5>
+ 120:	80 93 1b 3e 	sts	0x3E1B, r24	; 0x803e1b <__data_end+0x5>
 	}
 	
 	if(TWI0.MSTATUS & TWI_BUSERR_bm)
@@ -303,11 +303,11 @@ void i2c_state_isr (void)
 	{
 		i2c_fsm.state = I2C_BUS_ERR;
  12c:	88 e0       	ldi	r24, 0x08	; 8
- 12e:	80 93 19 3e 	sts	0x3E19, r24	; 0x803e19 <__data_end+0x5>
+ 12e:	80 93 1b 3e 	sts	0x3E1B, r24	; 0x803e1b <__data_end+0x5>
 	}
 	
 	i2c_fsm.state = state_callbacks[i2c_fsm.state]();
- 132:	c4 e1       	ldi	r28, 0x14	; 20
+ 132:	c6 e1       	ldi	r28, 0x16	; 22
  134:	de e3       	ldi	r29, 0x3E	; 62
  136:	ed 81       	ldd	r30, Y+5	; 0x05
  138:	f0 e0       	ldi	r31, 0x00	; 0
@@ -375,218 +375,318 @@ ISR(TWI0_TWIM_vect)
  194:	1f 90       	pop	r1
  196:	18 95       	reti
 
-00000198 <i2c_set_buffer>:
-	
-	------------------------------------------------------------------------------------------------	*/
-
-void i2c_set_buffer(uint8_t *buff, uint8_t size)
-{
-	i2c_fsm.byte_array = buff;
- 198:	e4 e1       	ldi	r30, 0x14	; 20
- 19a:	fe e3       	ldi	r31, 0x3E	; 62
- 19c:	81 83       	std	Z+1, r24	; 0x01
- 19e:	92 83       	std	Z+2, r25	; 0x02
-	i2c_fsm.size_byte_array = size;
- 1a0:	63 83       	std	Z+3, r22	; 0x03
-	i2c_fsm.byte_count = 0;
- 1a2:	14 82       	std	Z+4, r1	; 0x04
- 1a4:	08 95       	ret
-
-000001a6 <i2c_master_init>:
-}
-
-void i2c_master_init()
-{
-	// Peripheral controls
-	TWI0.CTRLA = TWI_SDASETUP_4CYC_gc | TWI_SDAHOLD_OFF_gc; // FMPEN (fast mode) set to zero
- 1a6:	e0 e1       	ldi	r30, 0x10	; 16
- 1a8:	f8 e0       	ldi	r31, 0x08	; 8
- 1aa:	10 82       	st	Z, r1
-	TWI0.DBGCTRL = TWI_DBGRUN_bm; // Keep peripheral running during debug mode
- 1ac:	81 e0       	ldi	r24, 0x01	; 1
- 1ae:	82 83       	std	Z+2, r24	; 0x02
-	// I2C Master controls
-	TWI0.MBAUD = 0x0B; // Derives SCL hi/lo times. (See data sheet for equation) Write while ENABLE bit in TWI.MCTRLA is '0
- 1b0:	8b e0       	ldi	r24, 0x0B	; 11
- 1b2:	86 83       	std	Z+6, r24	; 0x06
-	TWI0.MCTRLA = TWI_RIEN_bm | TWI_WIEN_bm | TWI_TIMEOUT_DISABLED_gc | TWI_ENABLE_bm; // Quick command and smart mode not in use
- 1b4:	81 ec       	ldi	r24, 0xC1	; 193
- 1b6:	83 83       	std	Z+3, r24	; 0x03
-	TWI0.MCTRLB &= ~TWI_ACKACT_bm; // 0 send ACK, 1 send NACK when data read or execute command written to CMD bits
- 1b8:	84 81       	ldd	r24, Z+4	; 0x04
- 1ba:	8b 7f       	andi	r24, 0xFB	; 251
- 1bc:	84 83       	std	Z+4, r24	; 0x04
-	TWI0_MCTRLB |= TWI_FLUSH_bm;
- 1be:	a4 e1       	ldi	r26, 0x14	; 20
- 1c0:	b8 e0       	ldi	r27, 0x08	; 8
- 1c2:	8c 91       	ld	r24, X
- 1c4:	88 60       	ori	r24, 0x08	; 8
- 1c6:	8c 93       	st	X, r24
-	
-	// !!ASSUMES BUS IS IDLE, SHOULD CHECK LINES ARE GOOD!!
-	TWI0.MSTATUS |= TWI_BUSSTATE_IDLE_gc;
- 1c8:	85 81       	ldd	r24, Z+5	; 0x05
- 1ca:	81 60       	ori	r24, 0x01	; 1
- 1cc:	85 83       	std	Z+5, r24	; 0x05
-	i2c_fsm.state = I2C_IDLE;
- 1ce:	10 92 19 3e 	sts	0x3E19, r1	; 0x803e19 <__data_end+0x5>
- 1d2:	08 95       	ret
-
-000001d4 <i2c_start>:
-	
-	// SHOULD RETURN SUCCESS/FAIL?
-}
-
-void i2c_start (uint8_t addr, uint8_t read_write) {
-	if (i2c_fsm.state == I2C_IDLE)
- 1d4:	90 91 19 3e 	lds	r25, 0x3E19	; 0x803e19 <__data_end+0x5>
- 1d8:	91 11       	cpse	r25, r1
- 1da:	08 c0       	rjmp	.+16     	; 0x1ec <i2c_start+0x18>
-	{
-		i2c_fsm.slave_addr = addr<<1 | read_write;
- 1dc:	e4 e1       	ldi	r30, 0x14	; 20
- 1de:	fe e3       	ldi	r31, 0x3E	; 62
- 1e0:	88 0f       	add	r24, r24
- 1e2:	68 2b       	or	r22, r24
- 1e4:	60 83       	st	Z, r22
-		i2c_fsm.state = I2C_START;
- 1e6:	81 e0       	ldi	r24, 0x01	; 1
- 1e8:	85 83       	std	Z+5, r24	; 0x05
-		
-		i2c_state_isr();
- 1ea:	8c df       	rcall	.-232    	; 0x104 <i2c_state_isr>
- 1ec:	08 95       	ret
-
-000001ee <system_init>:
-uint8_t bytes[] = {	OLATA0, 0x67	}; // Need to initialise expander IO port before this will work. IODRA, 0x00
+00000198 <system_init>:
+uint8_t bytes[] = {	0x40, OLATA0, 0x67	}; // Need to initialise expander IO port before this will work. IODRA, 0x00
 
 uint8_t system_init() 
 {
 	/*	GPIO	*/
-	PORTC.DIRSET = PIN0_bm; // Set onboard LED as output
- 1ee:	e0 e4       	ldi	r30, 0x40	; 64
- 1f0:	f4 e0       	ldi	r31, 0x04	; 4
- 1f2:	81 e0       	ldi	r24, 0x01	; 1
- 1f4:	81 83       	std	Z+1, r24	; 0x01
 	PORTC.PIN5CTRL = PORT_ISC_FALLING_gc; // Interrupt on button down
- 1f6:	83 e0       	ldi	r24, 0x03	; 3
- 1f8:	85 8b       	std	Z+21, r24	; 0x15
+ 198:	83 e0       	ldi	r24, 0x03	; 3
+ 19a:	80 93 55 04 	sts	0x0455, r24	; 0x800455 <__TEXT_REGION_LENGTH__+0x700455>
 	PORTB.DIRSET = PIN2_bm | PIN3_bm;  // UART
- 1fa:	8c e0       	ldi	r24, 0x0C	; 12
- 1fc:	80 93 21 04 	sts	0x0421, r24	; 0x800421 <__TEXT_REGION_LENGTH__+0x700421>
+ 19e:	8c e0       	ldi	r24, 0x0C	; 12
+ 1a0:	80 93 21 04 	sts	0x0421, r24	; 0x800421 <__TEXT_REGION_LENGTH__+0x700421>
 	PORTA.DIRSET = PIN1_bm | PIN2_bm;	// TWI
- 200:	86 e0       	ldi	r24, 0x06	; 6
- 202:	80 93 01 04 	sts	0x0401, r24	; 0x800401 <__TEXT_REGION_LENGTH__+0x700401>
+ 1a4:	86 e0       	ldi	r24, 0x06	; 6
+ 1a6:	80 93 01 04 	sts	0x0401, r24	; 0x800401 <__TEXT_REGION_LENGTH__+0x700401>
 	
 	/*	I/O Lines	*/
 	PORTMUX.CTRLB = PORTMUX_TWI0_ALTERNATE_gc | PORTMUX_SPI0_ALTERNATE_gc | PORTMUX_USART0_DEFAULT_gc;
- 206:	84 e1       	ldi	r24, 0x14	; 20
- 208:	80 93 01 02 	sts	0x0201, r24	; 0x800201 <__TEXT_REGION_LENGTH__+0x700201>
+ 1aa:	84 e1       	ldi	r24, 0x14	; 20
+ 1ac:	80 93 01 02 	sts	0x0201, r24	; 0x800201 <__TEXT_REGION_LENGTH__+0x700201>
 	
 	/*	Interrupts	*/
 	SREG |= CPU_I_bm;
- 20c:	8f b7       	in	r24, 0x3f	; 63
- 20e:	80 68       	ori	r24, 0x80	; 128
- 210:	8f bf       	out	0x3f, r24	; 63
+ 1b0:	8f b7       	in	r24, 0x3f	; 63
+ 1b2:	80 68       	ori	r24, 0x80	; 128
+ 1b4:	8f bf       	out	0x3f, r24	; 63
 	
-	i2c_master_init();
- 212:	c9 df       	rcall	.-110    	; 0x1a6 <i2c_master_init>
+	spi_master_init();
+ 1b6:	8d d0       	rcall	.+282    	; 0x2d2 <spi_master_init>
 	
 	return 0;
 }
- 214:	80 e0       	ldi	r24, 0x00	; 0
- 216:	08 95       	ret
+ 1b8:	80 e0       	ldi	r24, 0x00	; 0
+ 1ba:	08 95       	ret
 
-00000218 <main>:
+000001bc <main>:
 
 int main(void)
 {
 	system_init();
- 218:	ea df       	rcall	.-44     	; 0x1ee <system_init>
+ 1bc:	ed df       	rcall	.-38     	; 0x198 <system_init>
 	
 	// Should use (const unint8_t *) for EEPROM.
-	i2c_set_buffer((uint8_t *)0x1400, 2);
- 21a:	62 e0       	ldi	r22, 0x02	; 2
- 21c:	80 e0       	ldi	r24, 0x00	; 0
- 21e:	94 e1       	ldi	r25, 0x14	; 20
- 220:	bb df       	rcall	.-138    	; 0x198 <i2c_set_buffer>
-	i2c_start(SLAVE1_ADDR, I2C_WRITE_bm);
- 222:	60 e0       	ldi	r22, 0x00	; 0
- 224:	80 e2       	ldi	r24, 0x20	; 32
- 226:	d6 df       	rcall	.-84     	; 0x1d4 <i2c_start>
- 228:	ff cf       	rjmp	.-2      	; 0x228 <main+0x10>
+	spi_set_buffer((uint8_t *)0x1400, 3);
+ 1be:	63 e0       	ldi	r22, 0x03	; 3
+ 1c0:	80 e0       	ldi	r24, 0x00	; 0
+ 1c2:	94 e1       	ldi	r25, 0x14	; 20
+ 1c4:	7f d0       	rcall	.+254    	; 0x2c4 <spi_set_buffer>
+	spi_start();
+ 1c6:	96 d0       	rcall	.+300    	; 0x2f4 <spi_start>
+ 1c8:	ff cf       	rjmp	.-2      	; 0x1c8 <main+0xc>
 
-0000022a <__vector_5>:
+000001ca <__vector_5>:
 		
     }
 }
 
 ISR(PORTC_PORT_vect)
 {
- 22a:	1f 92       	push	r1
- 22c:	0f 92       	push	r0
- 22e:	0f b6       	in	r0, 0x3f	; 63
- 230:	0f 92       	push	r0
- 232:	11 24       	eor	r1, r1
- 234:	2f 93       	push	r18
- 236:	3f 93       	push	r19
- 238:	4f 93       	push	r20
- 23a:	5f 93       	push	r21
- 23c:	6f 93       	push	r22
- 23e:	7f 93       	push	r23
- 240:	8f 93       	push	r24
- 242:	9f 93       	push	r25
- 244:	af 93       	push	r26
- 246:	bf 93       	push	r27
- 248:	ef 93       	push	r30
- 24a:	ff 93       	push	r31
+ 1ca:	1f 92       	push	r1
+ 1cc:	0f 92       	push	r0
+ 1ce:	0f b6       	in	r0, 0x3f	; 63
+ 1d0:	0f 92       	push	r0
+ 1d2:	11 24       	eor	r1, r1
+ 1d4:	2f 93       	push	r18
+ 1d6:	3f 93       	push	r19
+ 1d8:	4f 93       	push	r20
+ 1da:	5f 93       	push	r21
+ 1dc:	6f 93       	push	r22
+ 1de:	7f 93       	push	r23
+ 1e0:	8f 93       	push	r24
+ 1e2:	9f 93       	push	r25
+ 1e4:	af 93       	push	r26
+ 1e6:	bf 93       	push	r27
+ 1e8:	ef 93       	push	r30
+ 1ea:	ff 93       	push	r31
 	uint8_t intflags = PORTC.INTFLAGS;
- 24c:	e0 e4       	ldi	r30, 0x40	; 64
- 24e:	f4 e0       	ldi	r31, 0x04	; 4
- 250:	81 85       	ldd	r24, Z+9	; 0x09
+ 1ec:	e0 e4       	ldi	r30, 0x40	; 64
+ 1ee:	f4 e0       	ldi	r31, 0x04	; 4
+ 1f0:	81 85       	ldd	r24, Z+9	; 0x09
 	PORTC.INTFLAGS = intflags;
- 252:	81 87       	std	Z+9, r24	; 0x09
-	// Debug
-	PORTC.OUTTGL = PIN0_bm;
- 254:	81 e0       	ldi	r24, 0x01	; 1
- 256:	87 83       	std	Z+7, r24	; 0x07
+ 1f2:	81 87       	std	Z+9, r24	; 0x09
 	
-	i2c_set_buffer(bytes, 2);
- 258:	62 e0       	ldi	r22, 0x02	; 2
- 25a:	82 e1       	ldi	r24, 0x12	; 18
- 25c:	9e e3       	ldi	r25, 0x3E	; 62
- 25e:	9c df       	rcall	.-200    	; 0x198 <i2c_set_buffer>
-	i2c_start(SLAVE1_ADDR, I2C_WRITE_bm);
- 260:	60 e0       	ldi	r22, 0x00	; 0
- 262:	80 e2       	ldi	r24, 0x20	; 32
- 264:	b7 df       	rcall	.-146    	; 0x1d4 <i2c_start>
-	bytes[1] = bytes[1] >> 7 | bytes[1] << 1;
- 266:	e2 e1       	ldi	r30, 0x12	; 18
- 268:	fe e3       	ldi	r31, 0x3E	; 62
- 26a:	81 81       	ldd	r24, Z+1	; 0x01
- 26c:	88 0f       	add	r24, r24
- 26e:	81 1d       	adc	r24, r1
- 270:	81 83       	std	Z+1, r24	; 0x01
- 272:	ff 91       	pop	r31
- 274:	ef 91       	pop	r30
- 276:	bf 91       	pop	r27
- 278:	af 91       	pop	r26
- 27a:	9f 91       	pop	r25
- 27c:	8f 91       	pop	r24
- 27e:	7f 91       	pop	r23
- 280:	6f 91       	pop	r22
- 282:	5f 91       	pop	r21
- 284:	4f 91       	pop	r20
- 286:	3f 91       	pop	r19
- 288:	2f 91       	pop	r18
- 28a:	0f 90       	pop	r0
- 28c:	0f be       	out	0x3f, r0	; 63
- 28e:	0f 90       	pop	r0
- 290:	1f 90       	pop	r1
- 292:	18 95       	reti
+	spi_set_buffer(bytes, 3);
+ 1f4:	63 e0       	ldi	r22, 0x03	; 3
+ 1f6:	82 e1       	ldi	r24, 0x12	; 18
+ 1f8:	9e e3       	ldi	r25, 0x3E	; 62
+ 1fa:	64 d0       	rcall	.+200    	; 0x2c4 <spi_set_buffer>
+	spi_start();
+ 1fc:	7b d0       	rcall	.+246    	; 0x2f4 <spi_start>
+	bytes[2] = bytes[2] >> 7 | bytes[2] << 1;
+ 1fe:	e2 e1       	ldi	r30, 0x12	; 18
+ 200:	fe e3       	ldi	r31, 0x3E	; 62
+ 202:	82 81       	ldd	r24, Z+2	; 0x02
+ 204:	88 0f       	add	r24, r24
+ 206:	81 1d       	adc	r24, r1
+ 208:	82 83       	std	Z+2, r24	; 0x02
+ 20a:	ff 91       	pop	r31
+ 20c:	ef 91       	pop	r30
+ 20e:	bf 91       	pop	r27
+ 210:	af 91       	pop	r26
+ 212:	9f 91       	pop	r25
+ 214:	8f 91       	pop	r24
+ 216:	7f 91       	pop	r23
+ 218:	6f 91       	pop	r22
+ 21a:	5f 91       	pop	r21
+ 21c:	4f 91       	pop	r20
+ 21e:	3f 91       	pop	r19
+ 220:	2f 91       	pop	r18
+ 222:	0f 90       	pop	r0
+ 224:	0f be       	out	0x3f, r0	; 63
+ 226:	0f 90       	pop	r0
+ 228:	1f 90       	pop	r1
+ 22a:	18 95       	reti
 
-00000294 <_exit>:
- 294:	f8 94       	cli
+0000022c <spi_slave_select>:
 
-00000296 <__stop_program>:
- 296:	ff cf       	rjmp	.-2      	; 0x296 <__stop_program>
+spi_data spi_io = {0};
+
+void spi_slave_select(void)
+{
+	VPORTC.OUT &= ~PIN3_bm; // Set SS low
+ 22c:	4b 98       	cbi	0x09, 3	; 9
+ 22e:	08 95       	ret
+
+00000230 <spi_slave_deselect>:
+}
+
+void spi_slave_deselect(void)
+{
+	VPORTC.OUT |= PIN3_bm; // Set SS high
+ 230:	4b 9a       	sbi	0x09, 3	; 9
+ 232:	08 95       	ret
+
+00000234 <spi_isr>:
+		For non-buffer mode:
+		SPI_IF_bm is set on transfer complete. Cleared on interrupt vector execution, or by SPI.INTFLAGS read followed by DATA access.
+		SPI_WRCOL is set if DATA is written before shift out is complete.
+	*/
+	
+	if (spi_io.byte_count < spi_io.size_byte_array)
+ 234:	ec e1       	ldi	r30, 0x1C	; 28
+ 236:	fe e3       	ldi	r31, 0x3E	; 62
+ 238:	84 81       	ldd	r24, Z+4	; 0x04
+ 23a:	93 81       	ldd	r25, Z+3	; 0x03
+ 23c:	89 17       	cp	r24, r25
+ 23e:	58 f4       	brcc	.+22     	; 0x256 <spi_isr+0x22>
+	{
+		SPI0.DATA = *(spi_io.byte_array + spi_io.byte_count);
+ 240:	a1 81       	ldd	r26, Z+1	; 0x01
+ 242:	b2 81       	ldd	r27, Z+2	; 0x02
+ 244:	a8 0f       	add	r26, r24
+ 246:	b1 1d       	adc	r27, r1
+ 248:	8c 91       	ld	r24, X
+ 24a:	80 93 24 08 	sts	0x0824, r24	; 0x800824 <__TEXT_REGION_LENGTH__+0x700824>
+		spi_io.byte_count ++;
+ 24e:	84 81       	ldd	r24, Z+4	; 0x04
+ 250:	8f 5f       	subi	r24, 0xFF	; 255
+ 252:	84 83       	std	Z+4, r24	; 0x04
+ 254:	08 95       	ret
+	}
+	else
+	{
+		spi_slave_deselect();
+ 256:	ec df       	rcall	.-40     	; 0x230 <spi_slave_deselect>
+ 258:	08 95       	ret
+
+0000025a <__vector_21>:
+	}
+}
+
+ISR(SPI0_INT_vect)
+{
+ 25a:	1f 92       	push	r1
+ 25c:	0f 92       	push	r0
+ 25e:	0f b6       	in	r0, 0x3f	; 63
+ 260:	0f 92       	push	r0
+ 262:	11 24       	eor	r1, r1
+ 264:	2f 93       	push	r18
+ 266:	3f 93       	push	r19
+ 268:	4f 93       	push	r20
+ 26a:	5f 93       	push	r21
+ 26c:	6f 93       	push	r22
+ 26e:	7f 93       	push	r23
+ 270:	8f 93       	push	r24
+ 272:	9f 93       	push	r25
+ 274:	af 93       	push	r26
+ 276:	bf 93       	push	r27
+ 278:	ef 93       	push	r30
+ 27a:	ff 93       	push	r31
+ 27c:	cf 93       	push	r28
+ 27e:	df 93       	push	r29
+ 280:	1f 92       	push	r1
+ 282:	cd b7       	in	r28, 0x3d	; 61
+ 284:	de b7       	in	r29, 0x3e	; 62
+	register8_t int_flags = SPI0.INTFLAGS;
+ 286:	80 91 23 08 	lds	r24, 0x0823	; 0x800823 <__TEXT_REGION_LENGTH__+0x700823>
+ 28a:	89 83       	std	Y+1, r24	; 0x01
+	// SPI_WRCOL_bm		write collision
+	// SPI_IF_bm		byte transfer complete
+	
+	if (int_flags & SPI_WRCOL_bm)
+ 28c:	89 81       	ldd	r24, Y+1	; 0x01
+ 28e:	86 ff       	sbrs	r24, 6
+ 290:	02 c0       	rjmp	.+4      	; 0x296 <__vector_21+0x3c>
+	{
+		spi_slave_deselect();
+ 292:	ce df       	rcall	.-100    	; 0x230 <spi_slave_deselect>
+ 294:	01 c0       	rjmp	.+2      	; 0x298 <__vector_21+0x3e>
+	} else
+	{
+		spi_isr();
+ 296:	ce df       	rcall	.-100    	; 0x234 <spi_isr>
+	}
+	SPI0.INTFLAGS = 0x00;
+ 298:	10 92 23 08 	sts	0x0823, r1	; 0x800823 <__TEXT_REGION_LENGTH__+0x700823>
+}
+ 29c:	0f 90       	pop	r0
+ 29e:	df 91       	pop	r29
+ 2a0:	cf 91       	pop	r28
+ 2a2:	ff 91       	pop	r31
+ 2a4:	ef 91       	pop	r30
+ 2a6:	bf 91       	pop	r27
+ 2a8:	af 91       	pop	r26
+ 2aa:	9f 91       	pop	r25
+ 2ac:	8f 91       	pop	r24
+ 2ae:	7f 91       	pop	r23
+ 2b0:	6f 91       	pop	r22
+ 2b2:	5f 91       	pop	r21
+ 2b4:	4f 91       	pop	r20
+ 2b6:	3f 91       	pop	r19
+ 2b8:	2f 91       	pop	r18
+ 2ba:	0f 90       	pop	r0
+ 2bc:	0f be       	out	0x3f, r0	; 63
+ 2be:	0f 90       	pop	r0
+ 2c0:	1f 90       	pop	r1
+ 2c2:	18 95       	reti
+
+000002c4 <spi_set_buffer>:
+	
+	------------------------------------------------------------------------------------------------	*/
+
+void spi_set_buffer(uint8_t *buff, uint8_t size)
+{
+	spi_io.byte_array = buff;
+ 2c4:	ec e1       	ldi	r30, 0x1C	; 28
+ 2c6:	fe e3       	ldi	r31, 0x3E	; 62
+ 2c8:	81 83       	std	Z+1, r24	; 0x01
+ 2ca:	92 83       	std	Z+2, r25	; 0x02
+	spi_io.size_byte_array = size;
+ 2cc:	63 83       	std	Z+3, r22	; 0x03
+	spi_io.byte_count = 0;
+ 2ce:	14 82       	std	Z+4, r1	; 0x04
+ 2d0:	08 95       	ret
+
+000002d2 <spi_master_init>:
+	// MISO	PA2/PC1 -	SPI controlled
+	// SCK	PA3/PC0	-	User defined
+	// SS	PA4/PC3	-	User defined
+	// For for multiple master configuration, SS must be set as input and held high for master operation.
+	
+	PORTC.DIRCLR = PIN1_bm;
+ 2d2:	e0 e4       	ldi	r30, 0x40	; 64
+ 2d4:	f4 e0       	ldi	r31, 0x04	; 4
+ 2d6:	82 e0       	ldi	r24, 0x02	; 2
+ 2d8:	82 83       	std	Z+2, r24	; 0x02
+	PORTC.DIRSET = PIN0_bm | PIN2_bm | PIN3_bm; // Try from app note
+ 2da:	8d e0       	ldi	r24, 0x0D	; 13
+ 2dc:	81 83       	std	Z+1, r24	; 0x01
+//	PORTC.DIRSET = PIN0_bm | PIN2_bm | PIN3_bm; // Set SCK, MOSI and SS as outputs (Alternate pins). SCK is also onboard LED for eval board.
+	//PORTC.PIN0CTRL = 0<<PORT_INVEN_bp | 1<<PORT_PULLUPEN_bp | PORT_ISC_INPUT_DISABLE_gc;
+	//PORTC.PIN2CTRL = 0<<PORT_INVEN_bp | 1<<PORT_PULLUPEN_bp | PORT_ISC_INPUT_DISABLE_gc;
+	//PORTC.PIN3CTRL = 0<<PORT_INVEN_bp | 1<<PORT_PULLUPEN_bp | PORT_ISC_INPUT_DISABLE_gc;
+	VPORTC.OUT &= ~PIN0_bm; // Set SCK low
+ 2de:	48 98       	cbi	0x09, 0	; 9
+	spi_slave_deselect();
+ 2e0:	a7 df       	rcall	.-178    	; 0x230 <spi_slave_deselect>
+	
+	// Setup for non-buffer mode.
+	SPI0.CTRLB = 0<<SPI_BUFEN_bp | 
+ 2e2:	e0 e2       	ldi	r30, 0x20	; 32
+ 2e4:	f8 e0       	ldi	r31, 0x08	; 8
+ 2e6:	84 e4       	ldi	r24, 0x44	; 68
+ 2e8:	81 83       	std	Z+1, r24	; 0x01
+				1<<SPI_BUFWR_bp | 
+				1<<SPI_SSD_bp | 
+				SPI_MODE_0_gc; // Disable multi-master for now
+	SPI0.INTCTRL = SPI_IE_bm; // Buffer mode disabled, use this interrupt.	
+ 2ea:	81 e0       	ldi	r24, 0x01	; 1
+ 2ec:	82 83       	std	Z+2, r24	; 0x02
+	SPI0.CTRLA = 0<<SPI_DORD_bp | 
+ 2ee:	85 e2       	ldi	r24, 0x25	; 37
+ 2f0:	80 83       	st	Z, r24
+ 2f2:	08 95       	ret
+
+000002f4 <spi_start>:
+				1<<SPI_ENABLE_bp; // MSB first as per MCP23S17 datasheet
+}
+
+void spi_start ()
+{
+	spi_slave_select();
+ 2f4:	9b df       	rcall	.-202    	; 0x22c <spi_slave_select>
+	// Setup time?
+	spi_io.byte_count = 0;
+ 2f6:	10 92 20 3e 	sts	0x3E20, r1	; 0x803e20 <spi_io+0x4>
+	spi_isr();
+ 2fa:	9c df       	rcall	.-200    	; 0x234 <spi_isr>
+ 2fc:	08 95       	ret
+
+000002fe <_exit>:
+ 2fe:	f8 94       	cli
+
+00000300 <__stop_program>:
+ 300:	ff cf       	rjmp	.-2      	; 0x300 <__stop_program>
