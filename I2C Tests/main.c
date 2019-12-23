@@ -24,7 +24,8 @@
 
 #define SLAVE1_ADDR 0x20
 
-uint8_t bytes[] = {	0x40, OLATA0, 0x67	}; // Need to initialise expander IO port before this will work. IODRA, 0x00
+static uint8_t tx_bytes[] = {	0x40, OLATA0, 0x67	}; // Need to initialise expander IO port before this will work (Set IODRA to 0x00).
+static uint8_t rx_bytes[16];
 
 uint8_t system_init() 
 {
@@ -48,8 +49,7 @@ int main(void)
 {
 	system_init();
 	
-	// Should use (const unint8_t *) for EEPROM.
-	spi_set_buffer((uint8_t *)0x1400, 3);
+	spi_set_buffers((const uint8_t *)0x1400, rx_bytes, 16); // EEPROM read
 	spi_start();
 	
 	while (1)
@@ -63,7 +63,7 @@ ISR(PORTC_PORT_vect)
 	uint8_t intflags = PORTC.INTFLAGS;
 	PORTC.INTFLAGS = intflags;
 	
-	spi_set_buffer(bytes, 3);
+	spi_set_buffers(tx_bytes, rx_bytes, 3);
 	spi_start();
-	bytes[2] = bytes[2] >> 7 | bytes[2] << 1;
+	tx_bytes[2] = tx_bytes[2] >> 7 | tx_bytes[2] << 1;
 }

@@ -4,12 +4,13 @@
 typedef struct
 {
 	uint8_t slave_addr;
-	uint8_t *byte_array;
+	const uint8_t *tx_byte_array;
+	uint8_t *rx_byte_array;
 	uint8_t size_byte_array;
 	uint8_t byte_count;
 } spi_data;
 
-spi_data spi_io = {0};
+static spi_data spi_io = {0};
 
 void spi_slave_select(void)
 {
@@ -32,11 +33,12 @@ void spi_isr (void)
 		SPI_IF_bm is set on transfer complete. Cleared on interrupt vector execution, or by SPI.INTFLAGS read followed by DATA access.
 		SPI_WRCOL is set if DATA is written before shift out is complete.
 	*/
+	*(spi_io.rx_byte_array + spi_io.byte_count) = SPI0.DATA;
+	spi_io.byte_count ++;
 	
 	if (spi_io.byte_count < spi_io.size_byte_array)
 	{
-		SPI0.DATA = *(spi_io.byte_array + spi_io.byte_count);
-		spi_io.byte_count ++;
+		SPI0.DATA = *(spi_io.tx_byte_array + spi_io.byte_count);		
 	}
 	else
 	{
@@ -53,10 +55,12 @@ ISR(SPI0_INT_vect)
 	if (int_flags & SPI_WRCOL_bm)
 	{
 		spi_slave_deselect();
-	} else
+	} 
+	else
 	{
 		spi_isr();
 	}
+	
 	SPI0.INTFLAGS = 0x00;
 }
 
@@ -64,9 +68,10 @@ ISR(SPI0_INT_vect)
 	
 	------------------------------------------------------------------------------------------------	*/
 
-void spi_set_buffer(uint8_t *buff, uint8_t size)
+void spi_set_buffers(const uint8_t *tx_buff, uint8_t *rx_buff, uint8_t size)
 {
-	spi_io.byte_array = buff;
+	spi_io.tx_byte_array = tx_buff;
+	spi_io.rx_byte_array = rx_buff;
 	spi_io.size_byte_array = size;
 	spi_io.byte_count = 0;
 }
@@ -101,5 +106,5 @@ void spi_start ()
 {
 	spi_slave_select();
 	spi_io.byte_count = 0;
-	spi_isr();
+	SPI0.DATA = *spi_io.tx_byte_array;
 }

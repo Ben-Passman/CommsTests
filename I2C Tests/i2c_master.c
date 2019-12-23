@@ -35,7 +35,7 @@ typedef struct
 	// fsm_function state_handler[5];
 } i2c_data;
 
-i2c_data i2c_fsm = {0};
+static i2c_data i2c_fsm = {0};
 
 /*	------------------------------------------------------------------------------------------------
 	FSM FUNCTIONS

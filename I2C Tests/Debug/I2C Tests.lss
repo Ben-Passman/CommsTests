@@ -641,13 +641,9 @@ void spi_set_buffer(uint8_t *buff, uint8_t size)
  2d4:	f4 e0       	ldi	r31, 0x04	; 4
  2d6:	82 e0       	ldi	r24, 0x02	; 2
  2d8:	82 83       	std	Z+2, r24	; 0x02
-	PORTC.DIRSET = PIN0_bm | PIN2_bm | PIN3_bm; // Try from app note
+	PORTC.DIRSET = PIN0_bm | PIN2_bm | PIN3_bm; // Set SCK, MOSI and SS as outputs (Alternate pins). SCK is also onboard LED for eval board.
  2da:	8d e0       	ldi	r24, 0x0D	; 13
  2dc:	81 83       	std	Z+1, r24	; 0x01
-//	PORTC.DIRSET = PIN0_bm | PIN2_bm | PIN3_bm; // Set SCK, MOSI and SS as outputs (Alternate pins). SCK is also onboard LED for eval board.
-	//PORTC.PIN0CTRL = 0<<PORT_INVEN_bp | 1<<PORT_PULLUPEN_bp | PORT_ISC_INPUT_DISABLE_gc;
-	//PORTC.PIN2CTRL = 0<<PORT_INVEN_bp | 1<<PORT_PULLUPEN_bp | PORT_ISC_INPUT_DISABLE_gc;
-	//PORTC.PIN3CTRL = 0<<PORT_INVEN_bp | 1<<PORT_PULLUPEN_bp | PORT_ISC_INPUT_DISABLE_gc;
 	VPORTC.OUT &= ~PIN0_bm; // Set SCK low
  2de:	48 98       	cbi	0x09, 0	; 9
 	spi_slave_deselect();
@@ -678,7 +674,6 @@ void spi_start ()
 {
 	spi_slave_select();
  2f4:	9b df       	rcall	.-202    	; 0x22c <spi_slave_select>
-	// Setup time?
 	spi_io.byte_count = 0;
  2f6:	10 92 20 3e 	sts	0x3E20, r1	; 0x803e20 <spi_io+0x4>
 	spi_isr();
