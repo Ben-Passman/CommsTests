@@ -1,11 +1,5 @@
 #pragma once
 
-typedef enum MCP23X17_ADDR_MODE_enum
-{
-	SEQ_ADDR = 0,
-	SEP_ADDR = 1
-}MCP23X17_ADDR_MODE_t;
-
 typedef enum MCP23X17_REG_enum
 {
 	/*	IOCON BANK=0	*/
@@ -24,6 +18,9 @@ typedef enum MCP23X17_REG_enum
 
 #define PORTA_ADDR(reg, mode) reg*(2-mode)
 #define PORTB_ADDR(reg, mode) reg*(2-mode)+9*mode+1
+
+#define SEQ_ADDR 0
+#define SEP_ADDR 1
 
 #define MCP23X17_READ 1
 #define MCP23X17_WRITE 0

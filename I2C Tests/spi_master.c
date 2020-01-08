@@ -1,41 +1,29 @@
 #include "spi_master.h"
-#include <avr/interrupt.h>
 
-typedef enum SPI_states_enum
+struct spi_data
 {
-	SPI_BUSY = 0,
-	SPI_TRANSFER_COMPLETE,
-	SPI_COL_ERR,
-	SPI_IDLE
-} spi_states_t;
-
-typedef spi_states_t (*spi_cb) (void);
-
-typedef struct
-{
-	spi_states_t status;
+	spi_status_t status;
 	const uint8_t *tx_byte_array;
 	uint8_t *rx_byte_array;
 	uint8_t size_byte_array;	
 	uint8_t byte_count;
-	cb buff_full_cb;
-} spi_data;
+};
 
-static spi_data spi_io = {0};
+static struct spi_data spi_io = {.status = SPI_IDLE, .tx_byte_array = NULL, .rx_byte_array = NULL, .size_byte_array = 0, .byte_count = 0};
 
-spi_states_t spi_slave_select(void)
+static spi_status_t spi_slave_select(void)
 {
 	VPORTC.OUT &= ~PIN3_bm; // Set SS low
 	return SPI_BUSY;
 }
 
-spi_states_t spi_slave_deselect(void)
+static spi_status_t spi_slave_deselect(void)
 {
 	VPORTC.OUT |= PIN3_bm;
 	return spi_io.status;
 }
 
-spi_states_t spi_slave_reset(void)
+static spi_status_t spi_slave_reset(void)
 {
 	spi_slave_deselect();
 	return SPI_IDLE;
@@ -45,7 +33,7 @@ spi_states_t spi_slave_reset(void)
 	INTERRUPTS
 	------------------------------------------------------------------------------------------------	*/
 
-void spi_isr (void)
+static void spi_isr (void)
 {
 	/*
 		For non-buffer mode:
@@ -61,8 +49,6 @@ void spi_isr (void)
 	}
 	else
 	{
-//		spi_io.callback[SPI_TRANSFER_COMPLETE];
-//		spi_io.buff_full_cb();
 		spi_io.status = spi_slave_reset();
 
 	}
@@ -77,8 +63,6 @@ ISR(SPI0_INT_vect)
 	// CURRENTLY NO COLLISION ERROR HANDLING
 	if (int_flags & SPI_WRCOL_bm) 
 	{
-//		spi_io.status = SPI_COL_ERR;
-//		spi_io.callback[SPI_COL_ERR];
 		spi_io.status = spi_slave_reset();
 	} 
 	else
@@ -93,7 +77,7 @@ ISR(SPI0_INT_vect)
 	
 	------------------------------------------------------------------------------------------------	*/
 
-void spi_master_init()
+spi_status_t spi_master_init()
 {
 	// For for multiple master configuration, SS must be set as input and held high for master operation.
 	
@@ -101,9 +85,6 @@ void spi_master_init()
 	PORTC.DIRSET = PIN0_bm | PIN2_bm | PIN3_bm; // Set SCK, MOSI and SS as outputs (Alternate pins). SCK is also onboard LED for eval board.
 	VPORTC.OUT &= ~PIN0_bm; // Set SCK low
 	spi_io.status = spi_slave_reset();
-/*	spi_io.callback[SPI_BUSY] = spi_slave_deselect;
-	spi_io.callback[SPI_TRANSFER_COMPLETE] = spi_slave_deselect;
-	spi_io.callback[SPI_COL_ERR] = spi_slave_deselect;*/
 	
 	// Setup for non-buffer mode.
 	SPI0.CTRLB = 0<<SPI_BUFEN_bp | 
@@ -116,10 +97,13 @@ void spi_master_init()
 				0<<SPI_CLK2X_bp | 
 				SPI_PRESC_DIV64_gc | 
 				1<<SPI_ENABLE_bp;
+				
+	return spi_io.status;
 }
 
-void spi_start (const uint8_t *tx_buff, uint8_t *rx_buff, uint8_t size, cb callback)
+spi_status_t spi_start (const uint8_t *tx_buff, uint8_t *rx_buff, uint8_t size)
 {
+	spi_status_t spi_state = SPI_IDLE;
 	switch(spi_io.status)
 	{
 		case SPI_IDLE:
@@ -129,10 +113,17 @@ void spi_start (const uint8_t *tx_buff, uint8_t *rx_buff, uint8_t size, cb callb
 			spi_io.rx_byte_array = rx_buff;
 			spi_io.size_byte_array = size;
 			spi_io.byte_count = 0;
-			spi_io.buff_full_cb = callback;
 			SPI0.DATA = *spi_io.tx_byte_array;
+			spi_state = spi_io.status;
 			break;
 		default:
+			spi_io.status = SPI_TX_BUFF_ERR;
 			break;
 	}
+	return spi_state;
+}
+
+spi_status_t get_spi_status (void)
+{
+	return spi_io.status;
 }

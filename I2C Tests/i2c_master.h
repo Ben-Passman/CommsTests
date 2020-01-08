@@ -1,7 +1,9 @@
 #pragma once
 
+#include <stdio.h>
 #include <stdint.h>
 #include <avr/io.h>
+#include <avr/interrupt.h>
 
 #define I2C_WRITE_bm 0x00
 #define I2C_READ_bm 0x01
@@ -12,9 +14,7 @@
 */
 
 // BAUD = (F_CLK_PER/F_SCL - 10 - F_CLK_PER*T_RISE)/2;
-
-void i2c_set_buffer(uint8_t *buff, uint8_t size);
+#define BAUD 0x0B
 
 void i2c_master_init();
-
-void i2c_start (register8_t addr, register8_t read_write);
+void i2c_start (register8_t addr, register8_t read_write, uint8_t *data, uint8_t data_size);
