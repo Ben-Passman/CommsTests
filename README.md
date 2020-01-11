@@ -2,7 +2,7 @@
 Personal project to brush up/re-learn C and embedded software.
 
 ## Setup
-Setup conssits of a single microcontroller connected to two I/O expanders, with each I/O expander connected in turn to a set of LEDS and push-buttons.
+Setup consists of a single microcontroller connected to two I/O expanders, with each I/O expander connected in turn to a set of LEDS and push-buttons.
 The microcontroller communicates to the other devices via SPI and I2C, and also monitors two interrupts, one from each of the I/O expanders.
 
 ## Hardware
