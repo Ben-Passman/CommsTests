@@ -7,8 +7,7 @@ The microcontroller communicates to the other devices via SPI and I2C, and also 
 
 ## Hardware
 
-![GitHub Logo](/images/logo.png)
-![Test setup schematic](/Comms Test Schematic.png)
+![Schematic](schematic.png)
 
 1 [ATtiny Xplained Mini Evaluation board](https://www.microchip.com/DevelopmentTools/ProductDetails/PartNO/ATTINY817-XMINI) ([ATtiny817](https://www.microchip.com/wwwproducts/en/ATTINY817) processor)
 2 [MCP23017](https://www.microchip.com/wwwproducts/en/MCP23017) I2C I/O expander
