@@ -23,10 +23,10 @@ Incomplete. Basic read/write functions and interrupts work, however there is no 
 
 ## Notes
 
-* Atmel I2C drivers used as reference, this is a much more simplistic implementation.
-* No buffering or I2C restart functionality as yet.
-* SPI run in unbuffered mode.
-* 
+* Atmel I2C drivers used as reference, this is a much more simplistic implementation
+* No message queuing/buffering for I2C or SPI yet
+* SPI peripheral running in unbuffered mode
+* I2C restart condition not yet implemented
 
 ## Authors
 
