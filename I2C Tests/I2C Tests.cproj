@@ -159,6 +159,12 @@
     <Compile Include="MCP23X17.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="msg_buffer.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="msg_buffer.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="spi_master.c">
       <SubType>compile</SubType>
     </Compile>

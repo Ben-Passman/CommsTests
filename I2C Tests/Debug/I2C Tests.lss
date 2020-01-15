@@ -3,33 +3,33 @@ I2C Tests.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         00000008  00803e00  000004a2  00000556  2**0
+  0 .data         0000001a  00803e00  0000074a  000007fe  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         00000490  00000000  00000000  000000b4  2**1
+  1 .text         00000738  00000000  00000000  000000b4  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .rodata       00000012  00008490  00000490  00000544  2**0
+  2 .rodata       00000012  00008738  00000738  000007ec  2**0
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  3 .bss          0000001c  00803e08  00803e08  0000055e  2**0
+  3 .bss          00000021  00803e1a  00803e1a  00000818  2**0
                   ALLOC
-  4 .comment      00000030  00000000  00000000  0000055e  2**0
+  4 .comment      00000030  00000000  00000000  00000818  2**0
                   CONTENTS, READONLY
-  5 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000590  2**2
+  5 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000848  2**2
                   CONTENTS, READONLY
-  6 .debug_aranges 00000120  00000000  00000000  000005cc  2**0
+  6 .debug_aranges 00000178  00000000  00000000  00000884  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_info   00002a1d  00000000  00000000  000006ec  2**0
+  7 .debug_info   00003072  00000000  00000000  000009fc  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_abbrev 00001b08  00000000  00000000  00003109  2**0
+  8 .debug_abbrev 00001c9d  00000000  00000000  00003a6e  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_line   00000927  00000000  00000000  00004c11  2**0
+  9 .debug_line   00000b8a  00000000  00000000  0000570b  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_frame  00000340  00000000  00000000  00005538  2**2
+ 10 .debug_frame  00000434  00000000  00000000  00006298  2**2
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_str    00001527  00000000  00000000  00005878  2**0
+ 11 .debug_str    0000169d  00000000  00000000  000066cc  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_loc    000005e7  00000000  00000000  00006d9f  2**0
+ 12 .debug_loc    000007c7  00000000  00000000  00007d69  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_ranges 000000f0  00000000  00000000  00007386  2**0
+ 13 .debug_ranges 00000138  00000000  00000000  00008530  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -38,9 +38,9 @@ Disassembly of section .text:
    0:	19 c0       	rjmp	.+50     	; 0x34 <__ctors_end>
    2:	33 c0       	rjmp	.+102    	; 0x6a <__bad_interrupt>
    4:	32 c0       	rjmp	.+100    	; 0x6a <__bad_interrupt>
-   6:	66 c1       	rjmp	.+716    	; 0x2d4 <__vector_3>
+   6:	72 c2       	rjmp	.+1252   	; 0x4ec <__vector_3>
    8:	30 c0       	rjmp	.+96     	; 0x6a <__bad_interrupt>
-   a:	8b c1       	rjmp	.+790    	; 0x322 <__vector_5>
+   a:	97 c2       	rjmp	.+1326   	; 0x53a <__vector_5>
    c:	2e c0       	rjmp	.+92     	; 0x6a <__bad_interrupt>
    e:	2d c0       	rjmp	.+90     	; 0x6a <__bad_interrupt>
   10:	2c c0       	rjmp	.+88     	; 0x6a <__bad_interrupt>
@@ -55,8 +55,8 @@ Disassembly of section .text:
   22:	23 c0       	rjmp	.+70     	; 0x6a <__bad_interrupt>
   24:	22 c0       	rjmp	.+68     	; 0x6a <__bad_interrupt>
   26:	21 c0       	rjmp	.+66     	; 0x6a <__bad_interrupt>
-  28:	a3 c0       	rjmp	.+326    	; 0x170 <__vector_20>
-  2a:	a6 c1       	rjmp	.+844    	; 0x378 <__vector_21>
+  28:	bd c0       	rjmp	.+378    	; 0x1a4 <__vector_20>
+  2a:	fa c2       	rjmp	.+1524   	; 0x620 <__vector_21>
   2c:	1e c0       	rjmp	.+60     	; 0x6a <__bad_interrupt>
   2e:	1d c0       	rjmp	.+58     	; 0x6a <__bad_interrupt>
   30:	1c c0       	rjmp	.+56     	; 0x6a <__bad_interrupt>
@@ -74,18 +74,18 @@ Disassembly of section .text:
   40:	1e e3       	ldi	r17, 0x3E	; 62
   42:	a0 e0       	ldi	r26, 0x00	; 0
   44:	be e3       	ldi	r27, 0x3E	; 62
-  46:	e2 ea       	ldi	r30, 0xA2	; 162
-  48:	f4 e0       	ldi	r31, 0x04	; 4
+  46:	ea e4       	ldi	r30, 0x4A	; 74
+  48:	f7 e0       	ldi	r31, 0x07	; 7
   4a:	02 c0       	rjmp	.+4      	; 0x50 <__do_copy_data+0x10>
   4c:	05 90       	lpm	r0, Z+
   4e:	0d 92       	st	X+, r0
-  50:	a8 30       	cpi	r26, 0x08	; 8
+  50:	aa 31       	cpi	r26, 0x1A	; 26
   52:	b1 07       	cpc	r27, r17
   54:	d9 f7       	brne	.-10     	; 0x4c <__do_copy_data+0xc>
 
 00000056 <__do_clear_bss>:
   56:	2e e3       	ldi	r18, 0x3E	; 62
-  58:	a8 e0       	ldi	r26, 0x08	; 8
+  58:	aa e1       	ldi	r26, 0x1A	; 26
   5a:	be e3       	ldi	r27, 0x3E	; 62
   5c:	01 c0       	rjmp	.+2      	; 0x60 <.do_clear_bss_start>
 
@@ -93,819 +93,1365 @@ Disassembly of section .text:
   5e:	1d 92       	st	X+, r1
 
 00000060 <.do_clear_bss_start>:
-  60:	a4 32       	cpi	r26, 0x24	; 36
+  60:	ab 33       	cpi	r26, 0x3B	; 59
   62:	b2 07       	cpc	r27, r18
   64:	e1 f7       	brne	.-8      	; 0x5e <.do_clear_bss_loop>
-  66:	20 d1       	rcall	.+576    	; 0x2a8 <main>
-  68:	11 c2       	rjmp	.+1058   	; 0x48c <_exit>
+  66:	26 d2       	rcall	.+1100   	; 0x4b4 <main>
+  68:	65 c3       	rjmp	.+1738   	; 0x734 <_exit>
 
 0000006a <__bad_interrupt>:
   6a:	ca cf       	rjmp	.-108    	; 0x0 <__vectors>
 
 0000006c <I2C_M_IDLE>:
+	------------------------------------------------------------------------------------------------	*/
 
-void i2c_set_buffer(uint8_t addr, uint8_t read_write, uint8_t *data, uint8_t data_size)
+static i2c_states_t I2C_M_IDLE(void)
 {
-	i2c_fsm.slave_addr = addr<<1 | read_write;
-	i2c_fsm.byte_array = data;
-	i2c_fsm.size_byte_array = data_size;
+	return I2C_IDLE;
+}
   6c:	80 e0       	ldi	r24, 0x00	; 0
   6e:	08 95       	ret
 
 00000070 <I2C_M_START>:
-  70:	e8 e0       	ldi	r30, 0x08	; 8
+	// On receiving ACK/NACK (if arbitration not lost) SCL held low and CLKHOLD and WIF set.
+	// If bus already owned, repeat start generated. (ACK/NACK sent first if previous operation was read)
+	// For read command RIF is set after byte received.
+	// Writes to MSTATUS clear flags (CHECK).
+	
+	i2c_fsm.byte_count = 0;
+  70:	ea e1       	ldi	r30, 0x1A	; 26
   72:	fe e3       	ldi	r31, 0x3E	; 62
   74:	14 82       	std	Z+4, r1	; 0x04
-  76:	80 81       	ld	r24, Z
-  78:	80 93 17 08 	sts	0x0817, r24	; 0x800817 <__TEXT_REGION_LENGTH__+0x700817>
-  7c:	80 fd       	sbrc	r24, 0
-  7e:	02 c0       	rjmp	.+4      	; 0x84 <I2C_M_START+0x14>
-  80:	84 e0       	ldi	r24, 0x04	; 4
-  82:	08 95       	ret
-  84:	85 e0       	ldi	r24, 0x05	; 5
+	i2c_fsm.nack_check = 1;
+  76:	81 e0       	ldi	r24, 0x01	; 1
+  78:	86 83       	std	Z+6, r24	; 0x06
+	TWI0.MADDR = i2c_fsm.slave_addr;
+  7a:	80 81       	ld	r24, Z
+  7c:	80 93 17 08 	sts	0x0817, r24	; 0x800817 <__TEXT_REGION_LENGTH__+0x700817>
+		
+	return (i2c_fsm.slave_addr & I2C_READ_bm) ? I2C_RX_BYTE : I2C_TX_BYTE;
+  80:	80 fd       	sbrc	r24, 0
+  82:	02 c0       	rjmp	.+4      	; 0x88 <I2C_M_START+0x18>
+  84:	84 e0       	ldi	r24, 0x04	; 4
   86:	08 95       	ret
+  88:	85 e0       	ldi	r24, 0x05	; 5
+}
+  8a:	08 95       	ret
 
-00000088 <I2C_M_STOP>:
-  88:	e0 e1       	ldi	r30, 0x10	; 16
-  8a:	f8 e0       	ldi	r31, 0x08	; 8
-  8c:	84 81       	ldd	r24, Z+4	; 0x04
-  8e:	83 60       	ori	r24, 0x03	; 3
-  90:	84 83       	std	Z+4, r24	; 0x04
-  92:	80 e0       	ldi	r24, 0x00	; 0
-  94:	08 95       	ret
+0000008c <I2C_M_STOP>:
+	//return I2C_M_START();
+}*/
 
-00000096 <I2C_M_RESET>:
-  96:	e0 e1       	ldi	r30, 0x10	; 16
-  98:	f8 e0       	ldi	r31, 0x08	; 8
-  9a:	84 81       	ldd	r24, Z+4	; 0x04
-  9c:	88 60       	ori	r24, 0x08	; 8
-  9e:	84 83       	std	Z+4, r24	; 0x04
-  a0:	85 81       	ldd	r24, Z+5	; 0x05
-  a2:	81 60       	ori	r24, 0x01	; 1
-  a4:	85 83       	std	Z+5, r24	; 0x05
-  a6:	80 e0       	ldi	r24, 0x00	; 0
-  a8:	08 95       	ret
+static i2c_states_t I2C_M_STOP(void)
+{
+	TWI0.MCTRLB	|= TWI_MCMD_STOP_gc | TWI_ACKACT_bm; // NACK used for RX STOP condition
+  8c:	e0 e1       	ldi	r30, 0x10	; 16
+  8e:	f8 e0       	ldi	r31, 0x08	; 8
+  90:	84 81       	ldd	r24, Z+4	; 0x04
+  92:	87 60       	ori	r24, 0x07	; 7
+  94:	84 83       	std	Z+4, r24	; 0x04
+	
+	return I2C_IDLE;
+}
+  96:	80 e0       	ldi	r24, 0x00	; 0
+  98:	08 95       	ret
 
-000000aa <I2C_M_TX>:
-  aa:	e8 e0       	ldi	r30, 0x08	; 8
-  ac:	fe e3       	ldi	r31, 0x3E	; 62
-  ae:	84 81       	ldd	r24, Z+4	; 0x04
-  b0:	a1 81       	ldd	r26, Z+1	; 0x01
-  b2:	b2 81       	ldd	r27, Z+2	; 0x02
-  b4:	a8 0f       	add	r26, r24
-  b6:	b1 1d       	adc	r27, r1
-  b8:	9c 91       	ld	r25, X
-  ba:	90 93 18 08 	sts	0x0818, r25	; 0x800818 <__TEXT_REGION_LENGTH__+0x700818>
-  be:	8f 5f       	subi	r24, 0xFF	; 255
-  c0:	84 83       	std	Z+4, r24	; 0x04
-  c2:	93 81       	ldd	r25, Z+3	; 0x03
-  c4:	89 17       	cp	r24, r25
-  c6:	10 f4       	brcc	.+4      	; 0xcc <I2C_M_TX+0x22>
-  c8:	84 e0       	ldi	r24, 0x04	; 4
-  ca:	08 95       	ret
-  cc:	82 e0       	ldi	r24, 0x02	; 2
-  ce:	08 95       	ret
+0000009a <I2C_M_RESET>:
 
-000000d0 <I2C_M_RX>:
-  d0:	e8 e0       	ldi	r30, 0x08	; 8
-  d2:	fe e3       	ldi	r31, 0x3E	; 62
-  d4:	84 81       	ldd	r24, Z+4	; 0x04
-  d6:	90 91 18 08 	lds	r25, 0x0818	; 0x800818 <__TEXT_REGION_LENGTH__+0x700818>
-  da:	a1 81       	ldd	r26, Z+1	; 0x01
-  dc:	b2 81       	ldd	r27, Z+2	; 0x02
-  de:	a8 0f       	add	r26, r24
-  e0:	b1 1d       	adc	r27, r1
-  e2:	9c 93       	st	X, r25
-  e4:	93 81       	ldd	r25, Z+3	; 0x03
-  e6:	89 17       	cp	r24, r25
-  e8:	50 f4       	brcc	.+20     	; 0xfe <I2C_M_RX+0x2e>
-  ea:	e0 e1       	ldi	r30, 0x10	; 16
-  ec:	f8 e0       	ldi	r31, 0x08	; 8
-  ee:	84 81       	ldd	r24, Z+4	; 0x04
-  f0:	8b 7f       	andi	r24, 0xFB	; 251
-  f2:	84 83       	std	Z+4, r24	; 0x04
-  f4:	84 81       	ldd	r24, Z+4	; 0x04
-  f6:	82 60       	ori	r24, 0x02	; 2
-  f8:	84 83       	std	Z+4, r24	; 0x04
-  fa:	85 e0       	ldi	r24, 0x05	; 5
-  fc:	06 c0       	rjmp	.+12     	; 0x10a <I2C_M_RX+0x3a>
-  fe:	e0 e1       	ldi	r30, 0x10	; 16
- 100:	f8 e0       	ldi	r31, 0x08	; 8
- 102:	84 81       	ldd	r24, Z+4	; 0x04
- 104:	84 60       	ori	r24, 0x04	; 4
- 106:	84 83       	std	Z+4, r24	; 0x04
- 108:	bf df       	rcall	.-130    	; 0x88 <I2C_M_STOP>
- 10a:	e8 e0       	ldi	r30, 0x08	; 8
- 10c:	fe e3       	ldi	r31, 0x3E	; 62
- 10e:	94 81       	ldd	r25, Z+4	; 0x04
- 110:	9f 5f       	subi	r25, 0xFF	; 255
- 112:	94 83       	std	Z+4, r25	; 0x04
- 114:	08 95       	ret
+static i2c_states_t I2C_M_RESET(void)
+{
+	TWI0.MCTRLB |= TWI_FLUSH_bm;
+  9a:	e0 e1       	ldi	r30, 0x10	; 16
+  9c:	f8 e0       	ldi	r31, 0x08	; 8
+  9e:	84 81       	ldd	r24, Z+4	; 0x04
+  a0:	88 60       	ori	r24, 0x08	; 8
+  a2:	84 83       	std	Z+4, r24	; 0x04
+	TWI0.MSTATUS |= TWI_BUSSTATE_IDLE_gc;
+  a4:	85 81       	ldd	r24, Z+5	; 0x05
+  a6:	81 60       	ori	r24, 0x01	; 1
+  a8:	85 83       	std	Z+5, r24	; 0x05
+	
+	return I2C_IDLE;
+}
+  aa:	80 e0       	ldi	r24, 0x00	; 0
+  ac:	08 95       	ret
 
-00000116 <I2C_M_RX_NACK>:
- 116:	b8 df       	rcall	.-144    	; 0x88 <I2C_M_STOP>
- 118:	08 95       	ret
+000000ae <I2C_M_TX>:
 
-0000011a <I2C_M_ARB_LOST>:
- 11a:	b6 df       	rcall	.-148    	; 0x88 <I2C_M_STOP>
- 11c:	08 95       	ret
+static i2c_states_t I2C_M_TX(void)
+{
+  ae:	cf 93       	push	r28
+  b0:	df 93       	push	r29
+	i2c_states_t next_state = I2C_TX_BYTE;
+	
+	// MDATA Read/Write only available during CLKHOLD.
+	// Write to MDATA forces transmit, ignores ACKACT
+	// MDATA read/write clears interrupt flags, but not ARBLOST or BUSERR
+	if (i2c_fsm.byte_count < i2c_fsm.size_byte_array)
+  b2:	ea e1       	ldi	r30, 0x1A	; 26
+  b4:	fe e3       	ldi	r31, 0x3E	; 62
+  b6:	84 81       	ldd	r24, Z+4	; 0x04
+  b8:	93 81       	ldd	r25, Z+3	; 0x03
+  ba:	89 17       	cp	r24, r25
+  bc:	58 f4       	brcc	.+22     	; 0xd4 <I2C_M_TX+0x26>
+	{
+		TWI0.MDATA = *(i2c_fsm.byte_array + i2c_fsm.byte_count);
+  be:	e0 91 1b 3e 	lds	r30, 0x3E1B	; 0x803e1b <__data_end+0x1>
+  c2:	f0 91 1c 3e 	lds	r31, 0x3E1C	; 0x803e1c <__data_end+0x2>
+  c6:	e8 0f       	add	r30, r24
+  c8:	f1 1d       	adc	r31, r1
+  ca:	80 81       	ld	r24, Z
+  cc:	80 93 18 08 	sts	0x0818, r24	; 0x800818 <__TEXT_REGION_LENGTH__+0x700818>
+	return I2C_IDLE;
+}
 
-0000011e <I2C_M_BUS_ERR>:
- 11e:	bb df       	rcall	.-138    	; 0x96 <I2C_M_RESET>
- 120:	08 95       	ret
+static i2c_states_t I2C_M_TX(void)
+{
+	i2c_states_t next_state = I2C_TX_BYTE;
+  d0:	84 e0       	ldi	r24, 0x04	; 4
+  d2:	08 c0       	rjmp	.+16     	; 0xe4 <I2C_M_TX+0x36>
+	{
+		TWI0.MDATA = *(i2c_fsm.byte_array + i2c_fsm.byte_count);
+	}
+	else
+	{
+		i2c_fsm.trx_complete();
+  d4:	ca e1       	ldi	r28, 0x1A	; 26
+  d6:	de e3       	ldi	r29, 0x3E	; 62
+  d8:	ef 81       	ldd	r30, Y+7	; 0x07
+  da:	f8 85       	ldd	r31, Y+8	; 0x08
+  dc:	09 95       	icall
+		next_state = i2c_fsm.end_state();
+  de:	e9 85       	ldd	r30, Y+9	; 0x09
+  e0:	fa 85       	ldd	r31, Y+10	; 0x0a
+  e2:	09 95       	icall
+	}
 
-00000122 <i2c_state_isr>:
- 122:	cf 93       	push	r28
- 124:	df 93       	push	r29
- 126:	80 91 15 08 	lds	r24, 0x0815	; 0x800815 <__TEXT_REGION_LENGTH__+0x700815>
- 12a:	84 ff       	sbrs	r24, 4
- 12c:	03 c0       	rjmp	.+6      	; 0x134 <i2c_state_isr+0x12>
- 12e:	82 e0       	ldi	r24, 0x02	; 2
- 130:	80 93 0d 3e 	sts	0x3E0D, r24	; 0x803e0d <__data_end+0x5>
- 134:	80 91 15 08 	lds	r24, 0x0815	; 0x800815 <__TEXT_REGION_LENGTH__+0x700815>
- 138:	83 ff       	sbrs	r24, 3
- 13a:	03 c0       	rjmp	.+6      	; 0x142 <i2c_state_isr+0x20>
- 13c:	82 e0       	ldi	r24, 0x02	; 2
- 13e:	80 93 0d 3e 	sts	0x3E0D, r24	; 0x803e0d <__data_end+0x5>
- 142:	80 91 15 08 	lds	r24, 0x0815	; 0x800815 <__TEXT_REGION_LENGTH__+0x700815>
- 146:	82 ff       	sbrs	r24, 2
- 148:	03 c0       	rjmp	.+6      	; 0x150 <i2c_state_isr+0x2e>
- 14a:	83 e0       	ldi	r24, 0x03	; 3
- 14c:	80 93 0d 3e 	sts	0x3E0D, r24	; 0x803e0d <__data_end+0x5>
- 150:	c8 e0       	ldi	r28, 0x08	; 8
- 152:	de e3       	ldi	r29, 0x3E	; 62
- 154:	ed 81       	ldd	r30, Y+5	; 0x05
- 156:	f0 e0       	ldi	r31, 0x00	; 0
- 158:	ee 0f       	add	r30, r30
- 15a:	ff 1f       	adc	r31, r31
- 15c:	e0 57       	subi	r30, 0x70	; 112
- 15e:	fb 47       	sbci	r31, 0x7B	; 123
- 160:	01 90       	ld	r0, Z+
- 162:	f0 81       	ld	r31, Z
- 164:	e0 2d       	mov	r30, r0
- 166:	09 95       	icall
- 168:	8d 83       	std	Y+5, r24	; 0x05
- 16a:	df 91       	pop	r29
- 16c:	cf 91       	pop	r28
- 16e:	08 95       	ret
+	i2c_fsm.byte_count++;
+  e4:	ea e1       	ldi	r30, 0x1A	; 26
+  e6:	fe e3       	ldi	r31, 0x3E	; 62
+  e8:	94 81       	ldd	r25, Z+4	; 0x04
+  ea:	9f 5f       	subi	r25, 0xFF	; 255
+  ec:	94 83       	std	Z+4, r25	; 0x04
+	
+	return next_state;
+}
+  ee:	df 91       	pop	r29
+  f0:	cf 91       	pop	r28
+  f2:	08 95       	ret
 
-00000170 <__vector_20>:
+000000f4 <I2C_M_RX>:
+
+static i2c_states_t I2C_M_RX(void)
+{
+  f4:	cf 93       	push	r28
+  f6:	df 93       	push	r29
+	// Error caught in ISR routine, for TX/RX select send byte, restart or stop.
+	i2c_states_t next_state = I2C_RX_BYTE;
+	i2c_fsm.nack_check = 0;
+  f8:	ea e1       	ldi	r30, 0x1A	; 26
+  fa:	fe e3       	ldi	r31, 0x3E	; 62
+  fc:	16 82       	std	Z+6, r1	; 0x06
+	*(i2c_fsm.byte_array + i2c_fsm.byte_count) = TWI0.MDATA;
+  fe:	84 81       	ldd	r24, Z+4	; 0x04
+ 100:	90 91 18 08 	lds	r25, 0x0818	; 0x800818 <__TEXT_REGION_LENGTH__+0x700818>
+ 104:	a1 81       	ldd	r26, Z+1	; 0x01
+ 106:	b2 81       	ldd	r27, Z+2	; 0x02
+ 108:	a8 0f       	add	r26, r24
+ 10a:	b1 1d       	adc	r27, r1
+ 10c:	9c 93       	st	X, r25
+	i2c_fsm.byte_count ++;
+ 10e:	8f 5f       	subi	r24, 0xFF	; 255
+ 110:	84 83       	std	Z+4, r24	; 0x04
+	
+	if (i2c_fsm.byte_count < i2c_fsm.size_byte_array)
+ 112:	93 81       	ldd	r25, Z+3	; 0x03
+ 114:	89 17       	cp	r24, r25
+ 116:	50 f4       	brcc	.+20     	; 0x12c <I2C_M_RX+0x38>
+	{
+		// To send NACK, set ACKACT in MCTRLB to 1
+		TWI0.MCTRLB &= ~TWI_ACKACT_bm; // Send ACK
+ 118:	e0 e1       	ldi	r30, 0x10	; 16
+ 11a:	f8 e0       	ldi	r31, 0x08	; 8
+ 11c:	84 81       	ldd	r24, Z+4	; 0x04
+ 11e:	8b 7f       	andi	r24, 0xFB	; 251
+ 120:	84 83       	std	Z+4, r24	; 0x04
+		TWI0.MCTRLB |= TWI_MCMD_RECVTRANS_gc; // Need to manually trigger this.	
+ 122:	84 81       	ldd	r24, Z+4	; 0x04
+ 124:	82 60       	ori	r24, 0x02	; 2
+ 126:	84 83       	std	Z+4, r24	; 0x04
+}
+
+static i2c_states_t I2C_M_RX(void)
+{
+	// Error caught in ISR routine, for TX/RX select send byte, restart or stop.
+	i2c_states_t next_state = I2C_RX_BYTE;
+ 128:	85 e0       	ldi	r24, 0x05	; 5
+ 12a:	08 c0       	rjmp	.+16     	; 0x13c <I2C_M_RX+0x48>
+		TWI0.MCTRLB &= ~TWI_ACKACT_bm; // Send ACK
+		TWI0.MCTRLB |= TWI_MCMD_RECVTRANS_gc; // Need to manually trigger this.	
+	}
+	else
+	{
+		i2c_fsm.trx_complete();
+ 12c:	ca e1       	ldi	r28, 0x1A	; 26
+ 12e:	de e3       	ldi	r29, 0x3E	; 62
+ 130:	ef 81       	ldd	r30, Y+7	; 0x07
+ 132:	f8 85       	ldd	r31, Y+8	; 0x08
+ 134:	09 95       	icall
+		next_state = i2c_fsm.end_state();
+ 136:	e9 85       	ldd	r30, Y+9	; 0x09
+ 138:	fa 85       	ldd	r31, Y+10	; 0x0a
+ 13a:	09 95       	icall
+	}
+	
+	return next_state;
+}
+ 13c:	df 91       	pop	r29
+ 13e:	cf 91       	pop	r28
+ 140:	08 95       	ret
+
+00000142 <I2C_M_RX_NACK>:
+
+static i2c_states_t I2C_M_RX_NACK(void)
+{
+	// No distinction between DATA/ADDR fail
+	return I2C_M_STOP();
+ 142:	a4 df       	rcall	.-184    	; 0x8c <I2C_M_STOP>
+}
+ 144:	08 95       	ret
+
+00000146 <I2C_M_ARB_LOST>:
+// ARBITRATION ERROR
+// Can lose arbitration during high data, NACK or start/repeat start.
+// Need to abort or re-send start (MADDR). Write to MADDR will clear flag.
+static i2c_states_t I2C_M_ARB_LOST(void)
+{
+	return I2C_M_STOP();
+ 146:	a2 df       	rcall	.-188    	; 0x8c <I2C_M_STOP>
+}
+ 148:	08 95       	ret
+
+0000014a <I2C_M_BUS_ERR>:
+// BUS ERROR
+// S/Sr/P violation
+// Reset peripheral and Re-send. MADDR clears BUSERR flag.
+static i2c_states_t I2C_M_BUS_ERR(void)
+{
+	return I2C_M_RESET();
+ 14a:	a7 df       	rcall	.-178    	; 0x9a <I2C_M_RESET>
+}
+ 14c:	08 95       	ret
+
+0000014e <i2c_state_isr>:
+	I2C_M_ARB_LOST,
+	I2C_M_BUS_ERR
+};
+
+static void i2c_state_isr (void)
+{
+ 14e:	cf 93       	push	r28
+ 150:	df 93       	push	r29
+	// Check ARBLOST in multi-master environment.
+	// Read triggers ACK/NACK and one byte read. RIF then set, WIF on error.
+	// TWI0.MSTATUS |= TWI_WIF_bm | TWI_RIF_bm; // Not required. Cleared by state machine operations.	
+	
+// PROBLEM: STALLS ON NACK SIGNAL. SHOULD ONLY BE CHECKING THIS AFTER START OR BYTE TX //
+	if (i2c_fsm.nack_check && (TWI0.MSTATUS & TWI_RXACK_bm)) // NACK received
+ 152:	80 91 20 3e 	lds	r24, 0x3E20	; 0x803e20 <__data_end+0x6>
+ 156:	88 23       	and	r24, r24
+ 158:	39 f0       	breq	.+14     	; 0x168 <i2c_state_isr+0x1a>
+ 15a:	80 91 15 08 	lds	r24, 0x0815	; 0x800815 <__TEXT_REGION_LENGTH__+0x700815>
+ 15e:	84 ff       	sbrs	r24, 4
+ 160:	03 c0       	rjmp	.+6      	; 0x168 <i2c_state_isr+0x1a>
+	{
+		i2c_fsm.state = I2C_NACK;
+ 162:	86 e0       	ldi	r24, 0x06	; 6
+ 164:	80 93 1f 3e 	sts	0x3E1F, r24	; 0x803e1f <__data_end+0x5>
+	}
+	
+	if (TWI0.MSTATUS & TWI_ARBLOST_bm)
+ 168:	80 91 15 08 	lds	r24, 0x0815	; 0x800815 <__TEXT_REGION_LENGTH__+0x700815>
+ 16c:	83 ff       	sbrs	r24, 3
+ 16e:	03 c0       	rjmp	.+6      	; 0x176 <i2c_state_isr+0x28>
+	{
+		i2c_fsm.state = I2C_ARB_ERR;
+ 170:	87 e0       	ldi	r24, 0x07	; 7
+ 172:	80 93 1f 3e 	sts	0x3E1F, r24	; 0x803e1f <__data_end+0x5>
+	}
+	
+	if(TWI0.MSTATUS & TWI_BUSERR_bm)
+ 176:	80 91 15 08 	lds	r24, 0x0815	; 0x800815 <__TEXT_REGION_LENGTH__+0x700815>
+ 17a:	82 ff       	sbrs	r24, 2
+ 17c:	03 c0       	rjmp	.+6      	; 0x184 <i2c_state_isr+0x36>
+	{
+		i2c_fsm.state = I2C_BUS_ERR;
+ 17e:	88 e0       	ldi	r24, 0x08	; 8
+ 180:	80 93 1f 3e 	sts	0x3E1F, r24	; 0x803e1f <__data_end+0x5>
+	}
+	
+	i2c_fsm.state = state_callbacks[i2c_fsm.state]();
+ 184:	ca e1       	ldi	r28, 0x1A	; 26
+ 186:	de e3       	ldi	r29, 0x3E	; 62
+ 188:	ed 81       	ldd	r30, Y+5	; 0x05
+ 18a:	f0 e0       	ldi	r31, 0x00	; 0
+ 18c:	ee 0f       	add	r30, r30
+ 18e:	ff 1f       	adc	r31, r31
+ 190:	e8 5c       	subi	r30, 0xC8	; 200
+ 192:	f8 47       	sbci	r31, 0x78	; 120
+ 194:	01 90       	ld	r0, Z+
+ 196:	f0 81       	ld	r31, Z
+ 198:	e0 2d       	mov	r30, r0
+ 19a:	09 95       	icall
+ 19c:	8d 83       	std	Y+5, r24	; 0x05
+}
+ 19e:	df 91       	pop	r29
+ 1a0:	cf 91       	pop	r28
+ 1a2:	08 95       	ret
+
+000001a4 <__vector_20>:
 /*	------------------------------------------------------------------------------------------------
 	INTERRUPTS
 	------------------------------------------------------------------------------------------------	*/
 
 ISR(TWI0_TWIM_vect)
 {
- 170:	1f 92       	push	r1
- 172:	0f 92       	push	r0
- 174:	0f b6       	in	r0, 0x3f	; 63
- 176:	0f 92       	push	r0
- 178:	11 24       	eor	r1, r1
- 17a:	2f 93       	push	r18
- 17c:	3f 93       	push	r19
- 17e:	4f 93       	push	r20
- 180:	5f 93       	push	r21
- 182:	6f 93       	push	r22
- 184:	7f 93       	push	r23
- 186:	8f 93       	push	r24
- 188:	9f 93       	push	r25
- 18a:	af 93       	push	r26
- 18c:	bf 93       	push	r27
- 18e:	ef 93       	push	r30
- 190:	ff 93       	push	r31
+ 1a4:	1f 92       	push	r1
+ 1a6:	0f 92       	push	r0
+ 1a8:	0f b6       	in	r0, 0x3f	; 63
+ 1aa:	0f 92       	push	r0
+ 1ac:	11 24       	eor	r1, r1
+ 1ae:	2f 93       	push	r18
+ 1b0:	3f 93       	push	r19
+ 1b2:	4f 93       	push	r20
+ 1b4:	5f 93       	push	r21
+ 1b6:	6f 93       	push	r22
+ 1b8:	7f 93       	push	r23
+ 1ba:	8f 93       	push	r24
+ 1bc:	9f 93       	push	r25
+ 1be:	af 93       	push	r26
+ 1c0:	bf 93       	push	r27
+ 1c2:	ef 93       	push	r30
+ 1c4:	ff 93       	push	r31
 	// Bus is IDLE, OWNER, BUSY or UNDEFINED. Errors are ARBLOST and BUSERR
 	// ARBLOST fails at any point on packet transmission, start -> NACK
 	// For ARBLOST must restart (write to MADDR). MADDR write clears ARBLOST flag.
 	// BUSERR is an illegal condition (e.g. Start followed by Stop). MADDR write clears BUSERR flag.
 	
 	i2c_state_isr();
- 192:	c7 df       	rcall	.-114    	; 0x122 <i2c_state_isr>
+ 1c6:	c3 df       	rcall	.-122    	; 0x14e <i2c_state_isr>
 }
- 194:	ff 91       	pop	r31
- 196:	ef 91       	pop	r30
- 198:	bf 91       	pop	r27
- 19a:	af 91       	pop	r26
- 19c:	9f 91       	pop	r25
- 19e:	8f 91       	pop	r24
- 1a0:	7f 91       	pop	r23
- 1a2:	6f 91       	pop	r22
- 1a4:	5f 91       	pop	r21
- 1a6:	4f 91       	pop	r20
- 1a8:	3f 91       	pop	r19
- 1aa:	2f 91       	pop	r18
- 1ac:	0f 90       	pop	r0
- 1ae:	0f be       	out	0x3f, r0	; 63
- 1b0:	0f 90       	pop	r0
- 1b2:	1f 90       	pop	r1
- 1b4:	18 95       	reti
+ 1c8:	ff 91       	pop	r31
+ 1ca:	ef 91       	pop	r30
+ 1cc:	bf 91       	pop	r27
+ 1ce:	af 91       	pop	r26
+ 1d0:	9f 91       	pop	r25
+ 1d2:	8f 91       	pop	r24
+ 1d4:	7f 91       	pop	r23
+ 1d6:	6f 91       	pop	r22
+ 1d8:	5f 91       	pop	r21
+ 1da:	4f 91       	pop	r20
+ 1dc:	3f 91       	pop	r19
+ 1de:	2f 91       	pop	r18
+ 1e0:	0f 90       	pop	r0
+ 1e2:	0f be       	out	0x3f, r0	; 63
+ 1e4:	0f 90       	pop	r0
+ 1e6:	1f 90       	pop	r1
+ 1e8:	18 95       	reti
 
-000001b6 <i2c_master_init>:
+000001ea <i2c_master_init>:
 	------------------------------------------------------------------------------------------------	*/
 
 void i2c_master_init()
 {
 	// Peripheral controls
 	TWI0.CTRLA = TWI_SDASETUP_4CYC_gc | TWI_SDAHOLD_OFF_gc | 0<<TWI_FMPEN_bp;
- 1b6:	e0 e1       	ldi	r30, 0x10	; 16
- 1b8:	f8 e0       	ldi	r31, 0x08	; 8
- 1ba:	10 82       	st	Z, r1
+ 1ea:	e0 e1       	ldi	r30, 0x10	; 16
+ 1ec:	f8 e0       	ldi	r31, 0x08	; 8
+ 1ee:	10 82       	st	Z, r1
 	TWI0.DBGCTRL = TWI_DBGRUN_bm; // Keep peripheral running during debug mode
- 1bc:	81 e0       	ldi	r24, 0x01	; 1
- 1be:	82 83       	std	Z+2, r24	; 0x02
+ 1f0:	81 e0       	ldi	r24, 0x01	; 1
+ 1f2:	82 83       	std	Z+2, r24	; 0x02
 	// I2C Master controls
-	TWI0.MBAUD = BAUD; // Derives SCL hi/lo times. (See data sheet for equation) Write while ENABLE bit in TWI.MCTRLA is 0
- 1c0:	8b e0       	ldi	r24, 0x0B	; 11
- 1c2:	86 83       	std	Z+6, r24	; 0x06
+	TWI0.MBAUD = I2C_BAUD; // Derives SCL hi/lo times. (See data sheet for equation) Write while ENABLE bit in TWI.MCTRLA is 0
+ 1f4:	8b e0       	ldi	r24, 0x0B	; 11
+ 1f6:	86 83       	std	Z+6, r24	; 0x06
 	TWI0.MCTRLA = TWI_RIEN_bm | TWI_WIEN_bm | TWI_TIMEOUT_DISABLED_gc | TWI_ENABLE_bm; // Quick command and smart mode not in use
- 1c4:	81 ec       	ldi	r24, 0xC1	; 193
- 1c6:	83 83       	std	Z+3, r24	; 0x03
+ 1f8:	81 ec       	ldi	r24, 0xC1	; 193
+ 1fa:	83 83       	std	Z+3, r24	; 0x03
 	TWI0.MCTRLB &= 0<<TWI_ACKACT_bp; // 0 send ACK, 1 send NACK when data read or execute command written to CMD bits
- 1c8:	84 81       	ldd	r24, Z+4	; 0x04
- 1ca:	14 82       	std	Z+4, r1	; 0x04
+ 1fc:	84 81       	ldd	r24, Z+4	; 0x04
+ 1fe:	14 82       	std	Z+4, r1	; 0x04
 	TWI0_MCTRLB |= TWI_FLUSH_bm;
- 1cc:	a4 e1       	ldi	r26, 0x14	; 20
- 1ce:	b8 e0       	ldi	r27, 0x08	; 8
- 1d0:	8c 91       	ld	r24, X
- 1d2:	88 60       	ori	r24, 0x08	; 8
- 1d4:	8c 93       	st	X, r24
+ 200:	a4 e1       	ldi	r26, 0x14	; 20
+ 202:	b8 e0       	ldi	r27, 0x08	; 8
+ 204:	8c 91       	ld	r24, X
+ 206:	88 60       	ori	r24, 0x08	; 8
+ 208:	8c 93       	st	X, r24
 	
 	// ASSUMES BUS IS IDLE, SHOULD CHECK SDA/SCK LINES. (Port A 1&2 for alt. pin config)
 	TWI0.MSTATUS |= TWI_BUSSTATE_IDLE_gc;	
- 1d6:	85 81       	ldd	r24, Z+5	; 0x05
- 1d8:	81 60       	ori	r24, 0x01	; 1
- 1da:	85 83       	std	Z+5, r24	; 0x05
+ 20a:	85 81       	ldd	r24, Z+5	; 0x05
+ 20c:	81 60       	ori	r24, 0x01	; 1
+ 20e:	85 83       	std	Z+5, r24	; 0x05
 
 	i2c_fsm.state = I2C_IDLE;
- 1dc:	10 92 0d 3e 	sts	0x3E0D, r1	; 0x803e0d <__data_end+0x5>
- 1e0:	08 95       	ret
+ 210:	10 92 1f 3e 	sts	0x3E1F, r1	; 0x803e1f <__data_end+0x5>
+ 214:	08 95       	ret
 
-000001e2 <i2c_start>:
-	// SHOULD RETURN SUCCESS/FAIL?
+00000216 <i2c_set_stop>:
 }
 
-void i2c_start (uint8_t addr, uint8_t read_write, uint8_t *data, uint8_t data_size) {
-	// Also need to check bus is free for multi-master.
-	if (i2c_fsm.state == I2C_IDLE)
- 1e2:	90 91 0d 3e 	lds	r25, 0x3E0D	; 0x803e0d <__data_end+0x5>
- 1e6:	91 11       	cpse	r25, r1
- 1e8:	0b c0       	rjmp	.+22     	; 0x200 <i2c_start+0x1e>
-
-static struct i2c_data i2c_fsm = {.slave_addr = 0, .byte_array = NULL, .size_byte_array = 0, .byte_count = 0, .state = I2C_IDLE};
-
-void i2c_set_buffer(uint8_t addr, uint8_t read_write, uint8_t *data, uint8_t data_size)
+void i2c_set_stop()
 {
-	i2c_fsm.slave_addr = addr<<1 | read_write;
- 1ea:	e8 e0       	ldi	r30, 0x08	; 8
- 1ec:	fe e3       	ldi	r31, 0x3E	; 62
- 1ee:	88 0f       	add	r24, r24
- 1f0:	68 2b       	or	r22, r24
- 1f2:	60 83       	st	Z, r22
+	i2c_fsm.end_state = I2C_M_STOP;
+ 216:	86 e4       	ldi	r24, 0x46	; 70
+ 218:	90 e0       	ldi	r25, 0x00	; 0
+ 21a:	80 93 23 3e 	sts	0x3E23, r24	; 0x803e23 <__data_end+0x9>
+ 21e:	90 93 24 3e 	sts	0x3E24, r25	; 0x803e24 <__data_end+0xa>
+ 222:	08 95       	ret
+
+00000224 <i2c_set_restart>:
+}
+
+void i2c_set_restart()
+{
+	i2c_fsm.end_state = I2C_M_START;
+ 224:	88 e3       	ldi	r24, 0x38	; 56
+ 226:	90 e0       	ldi	r25, 0x00	; 0
+ 228:	80 93 23 3e 	sts	0x3E23, r24	; 0x803e23 <__data_end+0x9>
+ 22c:	90 93 24 3e 	sts	0x3E24, r25	; 0x803e24 <__data_end+0xa>
+ 230:	08 95       	ret
+
+00000232 <i2c_set_buffer>:
+}
+
+void i2c_set_buffer(uint8_t slave_addr, uint8_t *data, uint8_t byte_count)
+{
+	i2c_fsm.slave_addr = slave_addr;
+ 232:	ea e1       	ldi	r30, 0x1A	; 26
+ 234:	fe e3       	ldi	r31, 0x3E	; 62
+ 236:	80 83       	st	Z, r24
 	i2c_fsm.byte_array = data;
- 1f4:	41 83       	std	Z+1, r20	; 0x01
- 1f6:	52 83       	std	Z+2, r21	; 0x02
-	i2c_fsm.size_byte_array = data_size;
- 1f8:	23 83       	std	Z+3, r18	; 0x03
-void i2c_start (uint8_t addr, uint8_t read_write, uint8_t *data, uint8_t data_size) {
-	// Also need to check bus is free for multi-master.
-	if (i2c_fsm.state == I2C_IDLE)
-	{
-		i2c_set_buffer(addr, read_write, data, data_size);
-		i2c_fsm.state = I2C_START;
- 1fa:	81 e0       	ldi	r24, 0x01	; 1
- 1fc:	85 83       	std	Z+5, r24	; 0x05
-		
-		i2c_state_isr();
- 1fe:	91 df       	rcall	.-222    	; 0x122 <i2c_state_isr>
- 200:	08 95       	ret
+ 238:	61 83       	std	Z+1, r22	; 0x01
+ 23a:	72 83       	std	Z+2, r23	; 0x02
+	i2c_fsm.size_byte_array = byte_count;
+ 23c:	43 83       	std	Z+3, r20	; 0x03
+ 23e:	08 95       	ret
 
-00000202 <system_init>:
-	spi_bytes[1] = PORTA_ADDR(OLAT, SEQ_ADDR);
-	spi_bytes[2] = (spi_bytes[2] & 0x01)<<7 |		// PORTB PIN0 -> PORTA PIN7
-					(spi_bytes[2] & 0x04)<<4 |	// PORTB PIN2 -> PORTA PIN6
-					(spi_bytes[2] & 0x10)<<1 |	// PORTB PIN4 -> PORTA PIN5
-					(spi_bytes[2] & 0x40)>>2;	// PORTB PIN6 -> PORTA PIN4
-	spi_start(spi_bytes, spi_bytes, 3); // Write to MCP23X17, no callback required
- 202:	83 e0       	ldi	r24, 0x03	; 3
- 204:	80 93 55 04 	sts	0x0455, r24	; 0x800455 <__TEXT_REGION_LENGTH__+0x700455>
- 208:	8c e0       	ldi	r24, 0x0C	; 12
- 20a:	80 93 21 04 	sts	0x0421, r24	; 0x800421 <__TEXT_REGION_LENGTH__+0x700421>
- 20e:	e0 e0       	ldi	r30, 0x00	; 0
- 210:	f4 e0       	ldi	r31, 0x04	; 4
- 212:	86 e0       	ldi	r24, 0x06	; 6
- 214:	81 83       	std	Z+1, r24	; 0x01
- 216:	82 e0       	ldi	r24, 0x02	; 2
- 218:	84 8b       	std	Z+20, r24	; 0x14
- 21a:	85 8b       	std	Z+21, r24	; 0x15
- 21c:	84 e1       	ldi	r24, 0x14	; 20
- 21e:	80 93 01 02 	sts	0x0201, r24	; 0x800201 <__TEXT_REGION_LENGTH__+0x700201>
- 222:	8f b7       	in	r24, 0x3f	; 63
- 224:	80 68       	ori	r24, 0x80	; 128
- 226:	8f bf       	out	0x3f, r24	; 63
- 228:	fb d0       	rcall	.+502    	; 0x420 <spi_master_init>
- 22a:	c5 df       	rcall	.-118    	; 0x1b6 <i2c_master_init>
- 22c:	80 e0       	ldi	r24, 0x00	; 0
- 22e:	08 95       	ret
+00000240 <i2c_start>:
+void i2c_start (callback cb)
+{
+//	switch (i2c_fsm.state)
+//	{
+//		case I2C_IDLE :
+	i2c_fsm.trx_complete = cb;
+ 240:	ea e1       	ldi	r30, 0x1A	; 26
+ 242:	fe e3       	ldi	r31, 0x3E	; 62
+ 244:	87 83       	std	Z+7, r24	; 0x07
+ 246:	90 87       	std	Z+8, r25	; 0x08
+	i2c_fsm.state = I2C_START;
+ 248:	81 e0       	ldi	r24, 0x01	; 1
+ 24a:	85 83       	std	Z+5, r24	; 0x05
+	i2c_fsm.nack_check = 0;
+ 24c:	16 82       	std	Z+6, r1	; 0x06
+	i2c_fsm.state = I2C_IDLE;
+}
 
-00000230 <mcp_cycle_LEDS>:
+void i2c_set_stop()
+{
+	i2c_fsm.end_state = I2C_M_STOP;
+ 24e:	86 e4       	ldi	r24, 0x46	; 70
+ 250:	90 e0       	ldi	r25, 0x00	; 0
+ 252:	81 87       	std	Z+9, r24	; 0x09
+ 254:	92 87       	std	Z+10, r25	; 0x0a
+//		case I2C_IDLE :
+	i2c_fsm.trx_complete = cb;
+	i2c_fsm.state = I2C_START;
+	i2c_fsm.nack_check = 0;
+	i2c_set_stop();
+	i2c_state_isr();
+ 256:	7b df       	rcall	.-266    	; 0x14e <i2c_state_isr>
+ 258:	08 95       	ret
+
+0000025a <i2c_idle>:
+//	}
+}
+
+uint8_t i2c_idle ()
+{
+	return i2c_fsm.state == I2C_IDLE;
+ 25a:	81 e0       	ldi	r24, 0x01	; 1
+ 25c:	90 91 1f 3e 	lds	r25, 0x3E1F	; 0x803e1f <__data_end+0x5>
+ 260:	91 11       	cpse	r25, r1
+ 262:	80 e0       	ldi	r24, 0x00	; 0
+ 264:	08 95       	ret
+
+00000266 <queue_msg>:
 	
-	
+	VPORTB.OUT |= PIN6_bm;
+	USART0.TXDATAL = c;
+	while(!(USART0.STATUS & USART_TXCIF_bm));
+	VPORTB.OUT &= ~PIN6_bm;
+	VPORTB.DIR &= ~PIN2_bm | PIN6_bm;
+ 266:	ef 92       	push	r14
+ 268:	ff 92       	push	r15
+ 26a:	0f 93       	push	r16
+ 26c:	1f 93       	push	r17
+ 26e:	f7 01       	movw	r30, r14
+ 270:	90 81       	ld	r25, Z
+ 272:	96 95       	lsr	r25
+ 274:	96 95       	lsr	r25
+ 276:	93 70       	andi	r25, 0x03	; 3
+ 278:	d8 01       	movw	r26, r16
+ 27a:	34 e0       	ldi	r19, 0x04	; 4
+ 27c:	93 9f       	mul	r25, r19
+ 27e:	a0 0d       	add	r26, r0
+ 280:	b1 1d       	adc	r27, r1
+ 282:	11 24       	eor	r1, r1
+ 284:	8f 77       	andi	r24, 0x7F	; 127
+ 286:	9c 91       	ld	r25, X
+ 288:	90 78       	andi	r25, 0x80	; 128
+ 28a:	89 2b       	or	r24, r25
+ 28c:	8c 93       	st	X, r24
+ 28e:	80 81       	ld	r24, Z
+ 290:	86 95       	lsr	r24
+ 292:	86 95       	lsr	r24
+ 294:	83 70       	andi	r24, 0x03	; 3
+ 296:	d8 01       	movw	r26, r16
+ 298:	94 e0       	ldi	r25, 0x04	; 4
+ 29a:	89 9f       	mul	r24, r25
+ 29c:	a0 0d       	add	r26, r0
+ 29e:	b1 1d       	adc	r27, r1
+ 2a0:	11 24       	eor	r1, r1
+ 2a2:	8c 91       	ld	r24, X
+ 2a4:	60 fb       	bst	r22, 0
+ 2a6:	87 f9       	bld	r24, 7
+ 2a8:	8c 93       	st	X, r24
+ 2aa:	80 81       	ld	r24, Z
+ 2ac:	86 95       	lsr	r24
+ 2ae:	86 95       	lsr	r24
+ 2b0:	83 70       	andi	r24, 0x03	; 3
+ 2b2:	d8 01       	movw	r26, r16
+ 2b4:	34 e0       	ldi	r19, 0x04	; 4
+ 2b6:	83 9f       	mul	r24, r19
+ 2b8:	a0 0d       	add	r26, r0
+ 2ba:	b1 1d       	adc	r27, r1
+ 2bc:	11 24       	eor	r1, r1
+ 2be:	11 96       	adiw	r26, 0x01	; 1
+ 2c0:	4d 93       	st	X+, r20
+ 2c2:	5c 93       	st	X, r21
+ 2c4:	12 97       	sbiw	r26, 0x02	; 2
+ 2c6:	80 81       	ld	r24, Z
+ 2c8:	86 95       	lsr	r24
+ 2ca:	86 95       	lsr	r24
+ 2cc:	83 70       	andi	r24, 0x03	; 3
+ 2ce:	d8 01       	movw	r26, r16
+ 2d0:	94 e0       	ldi	r25, 0x04	; 4
+ 2d2:	89 9f       	mul	r24, r25
+ 2d4:	a0 0d       	add	r26, r0
+ 2d6:	b1 1d       	adc	r27, r1
+ 2d8:	11 24       	eor	r1, r1
+ 2da:	13 96       	adiw	r26, 0x03	; 3
+ 2dc:	2c 93       	st	X, r18
+ 2de:	c7 01       	movw	r24, r14
+ 2e0:	59 d1       	rcall	.+690    	; 0x594 <rbuff4_inc>
+ 2e2:	1f 91       	pop	r17
+ 2e4:	0f 91       	pop	r16
+ 2e6:	ff 90       	pop	r15
+ 2e8:	ef 90       	pop	r14
+ 2ea:	08 95       	ret
+
+000002ec <mcp_i2c_callback>:
+ 2ec:	ef 92       	push	r14
+ 2ee:	ff 92       	push	r15
+ 2f0:	0f 93       	push	r16
+ 2f2:	1f 93       	push	r17
+ 2f4:	e0 91 3a 3e 	lds	r30, 0x3E3A	; 0x803e3a <i2c_buff>
+ 2f8:	e3 70       	andi	r30, 0x03	; 3
+ 2fa:	f0 e0       	ldi	r31, 0x00	; 0
+ 2fc:	ee 0f       	add	r30, r30
+ 2fe:	ff 1f       	adc	r31, r31
+ 300:	ee 0f       	add	r30, r30
+ 302:	ff 1f       	adc	r31, r31
+ 304:	e6 5d       	subi	r30, 0xD6	; 214
+ 306:	f1 4c       	sbci	r31, 0xC1	; 193
+ 308:	80 81       	ld	r24, Z
+ 30a:	88 23       	and	r24, r24
+ 30c:	94 f4       	brge	.+36     	; 0x332 <mcp_i2c_callback+0x46>
+ 30e:	80 91 29 3e 	lds	r24, 0x3E29	; 0x803e29 <i2c_rx_buffer>
+ 312:	80 93 01 3e 	sts	0x3E01, r24	; 0x803e01 <__data_start+0x1>
+ 316:	0f 2e       	mov	r0, r31
+ 318:	fa e3       	ldi	r31, 0x3A	; 58
+ 31a:	ef 2e       	mov	r14, r31
+ 31c:	fe e3       	ldi	r31, 0x3E	; 62
+ 31e:	ff 2e       	mov	r15, r31
+ 320:	f0 2d       	mov	r31, r0
+ 322:	0a e2       	ldi	r16, 0x2A	; 42
+ 324:	1e e3       	ldi	r17, 0x3E	; 62
+ 326:	22 e0       	ldi	r18, 0x02	; 2
+ 328:	40 e0       	ldi	r20, 0x00	; 0
+ 32a:	5e e3       	ldi	r21, 0x3E	; 62
+ 32c:	60 e0       	ldi	r22, 0x00	; 0
+ 32e:	80 e2       	ldi	r24, 0x20	; 32
+ 330:	9a df       	rcall	.-204    	; 0x266 <queue_msg>
+ 332:	8a e3       	ldi	r24, 0x3A	; 58
+ 334:	9e e3       	ldi	r25, 0x3E	; 62
+ 336:	55 d1       	rcall	.+682    	; 0x5e2 <rbuff4_dec>
+ 338:	80 91 3a 3e 	lds	r24, 0x3E3A	; 0x803e3a <i2c_buff>
+ 33c:	80 73       	andi	r24, 0x30	; 48
+ 33e:	99 f0       	breq	.+38     	; 0x366 <mcp_i2c_callback+0x7a>
+ 340:	e0 91 3a 3e 	lds	r30, 0x3E3A	; 0x803e3a <i2c_buff>
+ 344:	e3 70       	andi	r30, 0x03	; 3
+ 346:	f0 e0       	ldi	r31, 0x00	; 0
+ 348:	ee 0f       	add	r30, r30
+ 34a:	ff 1f       	adc	r31, r31
+ 34c:	ee 0f       	add	r30, r30
+ 34e:	ff 1f       	adc	r31, r31
+ 350:	e6 5d       	subi	r30, 0xD6	; 214
+ 352:	f1 4c       	sbci	r31, 0xC1	; 193
+ 354:	61 81       	ldd	r22, Z+1	; 0x01
+ 356:	72 81       	ldd	r23, Z+2	; 0x02
+ 358:	80 81       	ld	r24, Z
+ 35a:	43 81       	ldd	r20, Z+3	; 0x03
+ 35c:	88 0f       	add	r24, r24
+ 35e:	81 1d       	adc	r24, r1
+ 360:	68 df       	rcall	.-304    	; 0x232 <i2c_set_buffer>
+ 362:	60 df       	rcall	.-320    	; 0x224 <i2c_set_restart>
+ 364:	01 c0       	rjmp	.+2      	; 0x368 <mcp_i2c_callback+0x7c>
+ 366:	57 df       	rcall	.-338    	; 0x216 <i2c_set_stop>
+ 368:	1f 91       	pop	r17
+ 36a:	0f 91       	pop	r16
+ 36c:	ff 90       	pop	r15
+ 36e:	ef 90       	pop	r14
+ 370:	08 95       	ret
+
+00000372 <system_init>:
+ 372:	83 e0       	ldi	r24, 0x03	; 3
+ 374:	80 93 55 04 	sts	0x0455, r24	; 0x800455 <__TEXT_REGION_LENGTH__+0x700455>
+ 378:	8c e0       	ldi	r24, 0x0C	; 12
+ 37a:	80 93 21 04 	sts	0x0421, r24	; 0x800421 <__TEXT_REGION_LENGTH__+0x700421>
+ 37e:	e0 e0       	ldi	r30, 0x00	; 0
+ 380:	f4 e0       	ldi	r31, 0x04	; 4
+ 382:	86 e0       	ldi	r24, 0x06	; 6
+ 384:	81 83       	std	Z+1, r24	; 0x01
+ 386:	82 e0       	ldi	r24, 0x02	; 2
+ 388:	84 8b       	std	Z+20, r24	; 0x14
+ 38a:	85 8b       	std	Z+21, r24	; 0x15
+ 38c:	84 e1       	ldi	r24, 0x14	; 20
+ 38e:	80 93 01 02 	sts	0x0201, r24	; 0x800201 <__TEXT_REGION_LENGTH__+0x700201>
+ 392:	8f b7       	in	r24, 0x3f	; 63
+ 394:	80 68       	ori	r24, 0x80	; 128
+ 396:	8f bf       	out	0x3f, r24	; 63
+ 398:	97 d1       	rcall	.+814    	; 0x6c8 <spi_master_init>
+ 39a:	27 df       	rcall	.-434    	; 0x1ea <i2c_master_init>
+ 39c:	80 e0       	ldi	r24, 0x00	; 0
+ 39e:	08 95       	ret
+
+000003a0 <usart_init>:
+ 3a0:	e0 e0       	ldi	r30, 0x00	; 0
+ 3a2:	f8 e0       	ldi	r31, 0x08	; 8
+ 3a4:	80 e4       	ldi	r24, 0x40	; 64
+ 3a6:	86 83       	std	Z+6, r24	; 0x06
+ 3a8:	87 ee       	ldi	r24, 0xE7	; 231
+ 3aa:	90 e0       	ldi	r25, 0x00	; 0
+ 3ac:	80 87       	std	Z+8, r24	; 0x08
+ 3ae:	91 87       	std	Z+9, r25	; 0x09
+ 3b0:	08 95       	ret
+
+000003b2 <mcp_cycle_LEDS>:
+		i2c_set_stop();
+	}
 }
 
 void mcp_cycle_LEDS(void)
 {
- 230:	cf 93       	push	r28
+ 3b2:	ef 92       	push	r14
+ 3b4:	ff 92       	push	r15
+ 3b6:	0f 93       	push	r16
+ 3b8:	1f 93       	push	r17
 	LED_test = LED_test >> 7 | LED_test << 1;
- 232:	80 91 00 3e 	lds	r24, 0x3E00	; 0x803e00 <__data_start>
- 236:	88 0f       	add	r24, r24
- 238:	81 1d       	adc	r24, r1
- 23a:	80 93 00 3e 	sts	0x3E00, r24	; 0x803e00 <__data_start>
+ 3ba:	80 91 11 3e 	lds	r24, 0x3E11	; 0x803e11 <LED_test>
+ 3be:	88 0f       	add	r24, r24
+ 3c0:	81 1d       	adc	r24, r1
+ 3c2:	80 93 11 3e 	sts	0x3E11, r24	; 0x803e11 <LED_test>
 	spi_bytes[0] =  SPI_ADDR<<1 | MCP23X17_WRITE;
- 23e:	e0 e1       	ldi	r30, 0x10	; 16
- 240:	fe e3       	ldi	r31, 0x3E	; 62
- 242:	90 e4       	ldi	r25, 0x40	; 64
- 244:	90 83       	st	Z, r25
+ 3c6:	e5 e2       	ldi	r30, 0x25	; 37
+ 3c8:	fe e3       	ldi	r31, 0x3E	; 62
+ 3ca:	90 e4       	ldi	r25, 0x40	; 64
+ 3cc:	90 83       	st	Z, r25
 	spi_bytes[1] = PORTA_ADDR(OLAT, SEQ_ADDR);
- 246:	c4 e1       	ldi	r28, 0x14	; 20
- 248:	c1 83       	std	Z+1, r28	; 0x01
+ 3ce:	94 e1       	ldi	r25, 0x14	; 20
+ 3d0:	91 83       	std	Z+1, r25	; 0x01
 	spi_bytes[2] = LED_test;
- 24a:	82 83       	std	Z+2, r24	; 0x02
+ 3d2:	82 83       	std	Z+2, r24	; 0x02
 	spi_start(spi_bytes, spi_bytes, 3);
- 24c:	43 e0       	ldi	r20, 0x03	; 3
- 24e:	bf 01       	movw	r22, r30
- 250:	cf 01       	movw	r24, r30
- 252:	fc d0       	rcall	.+504    	; 0x44c <spi_start>
+ 3d4:	43 e0       	ldi	r20, 0x03	; 3
+ 3d6:	bf 01       	movw	r22, r30
+ 3d8:	cf 01       	movw	r24, r30
+ 3da:	8c d1       	rcall	.+792    	; 0x6f4 <spi_start>
 
-	i2c_bytes[0] = PORTA_ADDR(OLAT, SEQ_ADDR);
- 254:	e4 e1       	ldi	r30, 0x14	; 20
- 256:	fe e3       	ldi	r31, 0x3E	; 62
- 258:	c0 83       	st	Z, r28
-	i2c_bytes[1] = LED_test;
- 25a:	80 91 00 3e 	lds	r24, 0x3E00	; 0x803e00 <__data_start>
- 25e:	81 83       	std	Z+1, r24	; 0x01
-	i2c_start(I2C_ADDR_1, I2C_WRITE_bm, i2c_bytes, 2);
- 260:	22 e0       	ldi	r18, 0x02	; 2
- 262:	af 01       	movw	r20, r30
- 264:	60 e0       	ldi	r22, 0x00	; 0
- 266:	80 e2       	ldi	r24, 0x20	; 32
- 268:	bc df       	rcall	.-136    	; 0x1e2 <i2c_start>
+	// Buffer may be overwritten this way if queue is large. Use separate Read/Write buffers.
+	i2c_tx_buffer[1] = LED_test;
+ 3dc:	80 91 11 3e 	lds	r24, 0x3E11	; 0x803e11 <LED_test>
+ 3e0:	80 93 01 3e 	sts	0x3E01, r24	; 0x803e01 <__data_start+0x1>
+	queue_msg(I2C_ADDR_1, I2C_WRITE_bm, i2c_tx_buffer, 2, i2c_msgs, &i2c_buff);
+ 3e4:	0f 2e       	mov	r0, r31
+ 3e6:	fa e3       	ldi	r31, 0x3A	; 58
+ 3e8:	ef 2e       	mov	r14, r31
+ 3ea:	fe e3       	ldi	r31, 0x3E	; 62
+ 3ec:	ff 2e       	mov	r15, r31
+ 3ee:	f0 2d       	mov	r31, r0
+ 3f0:	0a e2       	ldi	r16, 0x2A	; 42
+ 3f2:	1e e3       	ldi	r17, 0x3E	; 62
+ 3f4:	22 e0       	ldi	r18, 0x02	; 2
+ 3f6:	40 e0       	ldi	r20, 0x00	; 0
+ 3f8:	5e e3       	ldi	r21, 0x3E	; 62
+ 3fa:	60 e0       	ldi	r22, 0x00	; 0
+ 3fc:	80 e2       	ldi	r24, 0x20	; 32
+ 3fe:	33 df       	rcall	.-410    	; 0x266 <queue_msg>
+	
+	if(i2c_idle())
+ 400:	2c df       	rcall	.-424    	; 0x25a <i2c_idle>
+ 402:	88 23       	and	r24, r24
+ 404:	a1 f0       	breq	.+40     	; 0x42e <__LOCK_REGION_LENGTH__+0x2e>
+	{
+		i2c_set_buffer(i2c_msgs[i2c_buff.head].addr<<1 | i2c_msgs[i2c_buff.head].rw, i2c_msgs[i2c_buff.head].data, i2c_msgs[i2c_buff.head].data_len);
+ 406:	e0 91 3a 3e 	lds	r30, 0x3E3A	; 0x803e3a <i2c_buff>
+ 40a:	e3 70       	andi	r30, 0x03	; 3
+ 40c:	f0 e0       	ldi	r31, 0x00	; 0
+ 40e:	ee 0f       	add	r30, r30
+ 410:	ff 1f       	adc	r31, r31
+ 412:	ee 0f       	add	r30, r30
+ 414:	ff 1f       	adc	r31, r31
+ 416:	e6 5d       	subi	r30, 0xD6	; 214
+ 418:	f1 4c       	sbci	r31, 0xC1	; 193
+ 41a:	61 81       	ldd	r22, Z+1	; 0x01
+ 41c:	72 81       	ldd	r23, Z+2	; 0x02
+ 41e:	80 81       	ld	r24, Z
+ 420:	43 81       	ldd	r20, Z+3	; 0x03
+ 422:	88 0f       	add	r24, r24
+ 424:	81 1d       	adc	r24, r1
+ 426:	05 df       	rcall	.-502    	; 0x232 <i2c_set_buffer>
+		i2c_start(mcp_i2c_callback);	
+ 428:	86 e7       	ldi	r24, 0x76	; 118
+ 42a:	91 e0       	ldi	r25, 0x01	; 1
+ 42c:	09 df       	rcall	.-494    	; 0x240 <i2c_start>
+	}
+	
 }
- 26a:	cf 91       	pop	r28
- 26c:	08 95       	ret
+ 42e:	1f 91       	pop	r17
+ 430:	0f 91       	pop	r16
+ 432:	ff 90       	pop	r15
+ 434:	ef 90       	pop	r14
+ 436:	08 95       	ret
 
-0000026e <mcp_read_inputs>:
+00000438 <mcp_read_inputs>:
 
 void mcp_read_inputs(void)
 {
+ 438:	ef 92       	push	r14
+ 43a:	ff 92       	push	r15
+ 43c:	0f 93       	push	r16
+ 43e:	1f 93       	push	r17
 	spi_bytes[0] = SPI_ADDR<<1 | MCP23X17_READ;
- 26e:	e0 e1       	ldi	r30, 0x10	; 16
- 270:	fe e3       	ldi	r31, 0x3E	; 62
- 272:	81 e4       	ldi	r24, 0x41	; 65
- 274:	80 83       	st	Z, r24
+ 440:	e5 e2       	ldi	r30, 0x25	; 37
+ 442:	fe e3       	ldi	r31, 0x3E	; 62
+ 444:	81 e4       	ldi	r24, 0x41	; 65
+ 446:	80 83       	st	Z, r24
 	spi_bytes[1] = PORTB_ADDR(INTCAP, SEQ_ADDR);
- 276:	81 e1       	ldi	r24, 0x11	; 17
- 278:	81 83       	std	Z+1, r24	; 0x01
-	// Counters confirm reads are being missed, possible data collision...
-	// Need to check for busy status and queue messages.
-	int_counter++;
- 27a:	80 91 0f 3e 	lds	r24, 0x3E0F	; 0x803e0f <int_counter>
- 27e:	8f 5f       	subi	r24, 0xFF	; 255
- 280:	80 93 0f 3e 	sts	0x3E0F, r24	; 0x803e0f <int_counter>
-	if (spi_start(spi_bytes, spi_bytes, 3) == SPI_BUSY)
- 284:	43 e0       	ldi	r20, 0x03	; 3
- 286:	bf 01       	movw	r22, r30
- 288:	cf 01       	movw	r24, r30
- 28a:	e0 d0       	rcall	.+448    	; 0x44c <spi_start>
- 28c:	81 11       	cpse	r24, r1
- 28e:	05 c0       	rjmp	.+10     	; 0x29a <mcp_read_inputs+0x2c>
-	{
-		read_counter++;
- 290:	80 91 0e 3e 	lds	r24, 0x3E0E	; 0x803e0e <read_counter>
- 294:	8f 5f       	subi	r24, 0xFF	; 255
- 296:	80 93 0e 3e 	sts	0x3E0E, r24	; 0x803e0e <read_counter>
-	}
+ 448:	81 e1       	ldi	r24, 0x11	; 17
+ 44a:	81 83       	std	Z+1, r24	; 0x01
+	spi_start(spi_bytes, spi_bytes, 3);
+ 44c:	43 e0       	ldi	r20, 0x03	; 3
+ 44e:	bf 01       	movw	r22, r30
+ 450:	cf 01       	movw	r24, r30
+ 452:	50 d1       	rcall	.+672    	; 0x6f4 <spi_start>
 	
 // I2C read requires write to select register, then restart to transfer.
-//	i2c_bytes[0] = PORTB_ADDR(INTCAP, SEQ_ADDR);
-//	i2c_start(I2C_ADDR_1, I2C_WRITE_bm, i2c_bytes, 2); // Select register to read, then do restart
-	i2c_start(I2C_ADDR_1, I2C_READ_bm, i2c_bytes, 16); // NEED TO CLEAN UP I2C READ FUNCTIONS
- 29a:	20 e1       	ldi	r18, 0x10	; 16
- 29c:	44 e1       	ldi	r20, 0x14	; 20
- 29e:	5e e3       	ldi	r21, 0x3E	; 62
- 2a0:	61 e0       	ldi	r22, 0x01	; 1
- 2a2:	80 e2       	ldi	r24, 0x20	; 32
- 2a4:	9e df       	rcall	.-196    	; 0x1e2 <i2c_start>
- 2a6:	08 95       	ret
-
-000002a8 <main>:
+	queue_msg(I2C_ADDR_1, I2C_WRITE_bm, &INTCAP_ADDR, 1, i2c_msgs, &i2c_buff);
+ 454:	0f 2e       	mov	r0, r31
+ 456:	fa e3       	ldi	r31, 0x3A	; 58
+ 458:	ef 2e       	mov	r14, r31
+ 45a:	fe e3       	ldi	r31, 0x3E	; 62
+ 45c:	ff 2e       	mov	r15, r31
+ 45e:	f0 2d       	mov	r31, r0
+ 460:	0a e2       	ldi	r16, 0x2A	; 42
+ 462:	1e e3       	ldi	r17, 0x3E	; 62
+ 464:	21 e0       	ldi	r18, 0x01	; 1
+ 466:	40 e1       	ldi	r20, 0x10	; 16
+ 468:	5e e3       	ldi	r21, 0x3E	; 62
+ 46a:	60 e0       	ldi	r22, 0x00	; 0
+ 46c:	80 e2       	ldi	r24, 0x20	; 32
+ 46e:	fb de       	rcall	.-522    	; 0x266 <queue_msg>
+	queue_msg(I2C_ADDR_1, I2C_READ_bm, &i2c_rx_buffer, 1, i2c_msgs, &i2c_buff);
+ 470:	21 e0       	ldi	r18, 0x01	; 1
+ 472:	49 e2       	ldi	r20, 0x29	; 41
+ 474:	5e e3       	ldi	r21, 0x3E	; 62
+ 476:	61 e0       	ldi	r22, 0x01	; 1
+ 478:	80 e2       	ldi	r24, 0x20	; 32
+ 47a:	f5 de       	rcall	.-534    	; 0x266 <queue_msg>
+	
+	if(i2c_idle())
+ 47c:	ee de       	rcall	.-548    	; 0x25a <i2c_idle>
+ 47e:	88 23       	and	r24, r24
+ 480:	a1 f0       	breq	.+40     	; 0x4aa <mcp_read_inputs+0x72>
+	{
+		i2c_set_buffer(i2c_msgs[i2c_buff.head].addr<<1 | i2c_msgs[i2c_buff.head].rw, i2c_msgs[i2c_buff.head].data, i2c_msgs[i2c_buff.head].data_len);
+ 482:	e0 91 3a 3e 	lds	r30, 0x3E3A	; 0x803e3a <i2c_buff>
+ 486:	e3 70       	andi	r30, 0x03	; 3
+ 488:	f0 e0       	ldi	r31, 0x00	; 0
+ 48a:	ee 0f       	add	r30, r30
+ 48c:	ff 1f       	adc	r31, r31
+ 48e:	ee 0f       	add	r30, r30
+ 490:	ff 1f       	adc	r31, r31
+ 492:	e6 5d       	subi	r30, 0xD6	; 214
+ 494:	f1 4c       	sbci	r31, 0xC1	; 193
+ 496:	61 81       	ldd	r22, Z+1	; 0x01
+ 498:	72 81       	ldd	r23, Z+2	; 0x02
+ 49a:	80 81       	ld	r24, Z
+ 49c:	43 81       	ldd	r20, Z+3	; 0x03
+ 49e:	88 0f       	add	r24, r24
+ 4a0:	81 1d       	adc	r24, r1
+ 4a2:	c7 de       	rcall	.-626    	; 0x232 <i2c_set_buffer>
+		i2c_start(mcp_i2c_callback);	
+ 4a4:	86 e7       	ldi	r24, 0x76	; 118
+ 4a6:	91 e0       	ldi	r25, 0x01	; 1
+ 4a8:	cb de       	rcall	.-618    	; 0x240 <i2c_start>
+	}
 }
+ 4aa:	1f 91       	pop	r17
+ 4ac:	0f 91       	pop	r16
+ 4ae:	ff 90       	pop	r15
+ 4b0:	ef 90       	pop	r14
+ 4b2:	08 95       	ret
+
+000004b4 <main>:
 
 int main(void)
 {
- 2a8:	cf 93       	push	r28
- 2aa:	df 93       	push	r29
- 2ac:	cd b7       	in	r28, 0x3d	; 61
- 2ae:	de b7       	in	r29, 0x3e	; 62
- 2b0:	60 97       	sbiw	r28, 0x10	; 16
- 2b2:	cd bf       	out	0x3d, r28	; 61
- 2b4:	de bf       	out	0x3e, r29	; 62
-	uint8_t spi_rx_temp[16];
+ 4b4:	cf 93       	push	r28
+ 4b6:	df 93       	push	r29
+ 4b8:	cd b7       	in	r28, 0x3d	; 61
+ 4ba:	de b7       	in	r29, 0x3e	; 62
+ 4bc:	60 97       	sbiw	r28, 0x10	; 16
+ 4be:	cd bf       	out	0x3d, r28	; 61
+ 4c0:	de bf       	out	0x3e, r29	; 62
+	uint8_t spi_rx_temp[16]; // Used once, should free up this memory after use.
 	
 	system_init();
- 2b6:	a5 df       	rcall	.-182    	; 0x202 <system_init>
-	spi_start((const uint8_t *)0x1400, spi_rx_temp, 16); // Read MCP23X17 settings from EEPROM	
- 2b8:	40 e1       	ldi	r20, 0x10	; 16
- 2ba:	be 01       	movw	r22, r28
- 2bc:	6f 5f       	subi	r22, 0xFF	; 255
- 2be:	7f 4f       	sbci	r23, 0xFF	; 255
- 2c0:	80 e0       	ldi	r24, 0x00	; 0
- 2c2:	94 e1       	ldi	r25, 0x14	; 20
- 2c4:	c3 d0       	rcall	.+390    	; 0x44c <spi_start>
-	i2c_start(I2C_ADDR_1, I2C_WRITE_bm, (uint8_t *)0x1401, 15);
- 2c6:	2f e0       	ldi	r18, 0x0F	; 15
- 2c8:	41 e0       	ldi	r20, 0x01	; 1
- 2ca:	54 e1       	ldi	r21, 0x14	; 20
- 2cc:	60 e0       	ldi	r22, 0x00	; 0
- 2ce:	80 e2       	ldi	r24, 0x20	; 32
- 2d0:	88 df       	rcall	.-240    	; 0x1e2 <i2c_start>
- 2d2:	ff cf       	rjmp	.-2      	; 0x2d2 <main+0x2a>
+ 4c2:	57 df       	rcall	.-338    	; 0x372 <system_init>
+	usart_init();
+ 4c4:	6d df       	rcall	.-294    	; 0x3a0 <usart_init>
+	rbuff4_clear(&i2c_buff);
+ 4c6:	8a e3       	ldi	r24, 0x3A	; 58
+ 4c8:	9e e3       	ldi	r25, 0x3E	; 62
+ 4ca:	5e d0       	rcall	.+188    	; 0x588 <rbuff4_clear>
+	spi_start(SPI_SETUP, spi_rx_temp, 16); // Read MCP23X17 settings from EEPROM	
+ 4cc:	40 e1       	ldi	r20, 0x10	; 16
+ 4ce:	be 01       	movw	r22, r28
+ 4d0:	6f 5f       	subi	r22, 0xFF	; 255
+ 4d2:	7f 4f       	sbci	r23, 0xFF	; 255
+ 4d4:	80 e0       	ldi	r24, 0x00	; 0
+ 4d6:	94 e1       	ldi	r25, 0x14	; 20
+ 4d8:	0d d1       	rcall	.+538    	; 0x6f4 <spi_start>
+	i2c_set_buffer((I2C_ADDR_1<<1) | I2C_WRITE_bm, I2C_SETUP, 15);
+ 4da:	4f e0       	ldi	r20, 0x0F	; 15
+ 4dc:	61 e0       	ldi	r22, 0x01	; 1
+ 4de:	74 e1       	ldi	r23, 0x14	; 20
+ 4e0:	80 e4       	ldi	r24, 0x40	; 64
+ 4e2:	a7 de       	rcall	.-690    	; 0x232 <i2c_set_buffer>
+	i2c_start(mcp_i2c_callback);
+ 4e4:	86 e7       	ldi	r24, 0x76	; 118
+ 4e6:	91 e0       	ldi	r25, 0x01	; 1
+ 4e8:	ab de       	rcall	.-682    	; 0x240 <i2c_start>
+ 4ea:	ff cf       	rjmp	.-2      	; 0x4ea <main+0x36>
 
-000002d4 <__vector_3>:
+000004ec <__vector_3>:
 		
     }
 }
 
 ISR(PORTA_PORT_vect) 
 {
- 2d4:	1f 92       	push	r1
- 2d6:	0f 92       	push	r0
- 2d8:	0f b6       	in	r0, 0x3f	; 63
- 2da:	0f 92       	push	r0
- 2dc:	11 24       	eor	r1, r1
- 2de:	2f 93       	push	r18
- 2e0:	3f 93       	push	r19
- 2e2:	4f 93       	push	r20
- 2e4:	5f 93       	push	r21
- 2e6:	6f 93       	push	r22
- 2e8:	7f 93       	push	r23
- 2ea:	8f 93       	push	r24
- 2ec:	9f 93       	push	r25
- 2ee:	af 93       	push	r26
- 2f0:	bf 93       	push	r27
- 2f2:	ef 93       	push	r30
- 2f4:	ff 93       	push	r31
+ 4ec:	1f 92       	push	r1
+ 4ee:	0f 92       	push	r0
+ 4f0:	0f b6       	in	r0, 0x3f	; 63
+ 4f2:	0f 92       	push	r0
+ 4f4:	11 24       	eor	r1, r1
+ 4f6:	2f 93       	push	r18
+ 4f8:	3f 93       	push	r19
+ 4fa:	4f 93       	push	r20
+ 4fc:	5f 93       	push	r21
+ 4fe:	6f 93       	push	r22
+ 500:	7f 93       	push	r23
+ 502:	8f 93       	push	r24
+ 504:	9f 93       	push	r25
+ 506:	af 93       	push	r26
+ 508:	bf 93       	push	r27
+ 50a:	ef 93       	push	r30
+ 50c:	ff 93       	push	r31
 	uint8_t intflags = PORTA.INTFLAGS;
- 2f6:	e0 e0       	ldi	r30, 0x00	; 0
- 2f8:	f4 e0       	ldi	r31, 0x04	; 4
- 2fa:	81 85       	ldd	r24, Z+9	; 0x09
+ 50e:	e0 e0       	ldi	r30, 0x00	; 0
+ 510:	f4 e0       	ldi	r31, 0x04	; 4
+ 512:	81 85       	ldd	r24, Z+9	; 0x09
 	PORTA.INTFLAGS = intflags;
- 2fc:	81 87       	std	Z+9, r24	; 0x09
+ 514:	81 87       	std	Z+9, r24	; 0x09
 	
 	// MCP PORTB interrupt
 	// PINA4 -> SPI
 	// PINA5 -> I2C
 	
 	mcp_read_inputs();
- 2fe:	b7 df       	rcall	.-146    	; 0x26e <mcp_read_inputs>
+ 516:	90 df       	rcall	.-224    	; 0x438 <mcp_read_inputs>
 }
- 300:	ff 91       	pop	r31
- 302:	ef 91       	pop	r30
- 304:	bf 91       	pop	r27
- 306:	af 91       	pop	r26
- 308:	9f 91       	pop	r25
- 30a:	8f 91       	pop	r24
- 30c:	7f 91       	pop	r23
- 30e:	6f 91       	pop	r22
- 310:	5f 91       	pop	r21
- 312:	4f 91       	pop	r20
- 314:	3f 91       	pop	r19
- 316:	2f 91       	pop	r18
- 318:	0f 90       	pop	r0
- 31a:	0f be       	out	0x3f, r0	; 63
- 31c:	0f 90       	pop	r0
- 31e:	1f 90       	pop	r1
- 320:	18 95       	reti
+ 518:	ff 91       	pop	r31
+ 51a:	ef 91       	pop	r30
+ 51c:	bf 91       	pop	r27
+ 51e:	af 91       	pop	r26
+ 520:	9f 91       	pop	r25
+ 522:	8f 91       	pop	r24
+ 524:	7f 91       	pop	r23
+ 526:	6f 91       	pop	r22
+ 528:	5f 91       	pop	r21
+ 52a:	4f 91       	pop	r20
+ 52c:	3f 91       	pop	r19
+ 52e:	2f 91       	pop	r18
+ 530:	0f 90       	pop	r0
+ 532:	0f be       	out	0x3f, r0	; 63
+ 534:	0f 90       	pop	r0
+ 536:	1f 90       	pop	r1
+ 538:	18 95       	reti
 
-00000322 <__vector_5>:
+0000053a <__vector_5>:
 
 ISR(PORTC_PORT_vect) // Eval board button
 {
- 322:	1f 92       	push	r1
- 324:	0f 92       	push	r0
- 326:	0f b6       	in	r0, 0x3f	; 63
- 328:	0f 92       	push	r0
- 32a:	11 24       	eor	r1, r1
- 32c:	2f 93       	push	r18
- 32e:	3f 93       	push	r19
- 330:	4f 93       	push	r20
- 332:	5f 93       	push	r21
- 334:	6f 93       	push	r22
- 336:	7f 93       	push	r23
- 338:	8f 93       	push	r24
- 33a:	9f 93       	push	r25
- 33c:	af 93       	push	r26
- 33e:	bf 93       	push	r27
- 340:	ef 93       	push	r30
- 342:	ff 93       	push	r31
+ 53a:	1f 92       	push	r1
+ 53c:	0f 92       	push	r0
+ 53e:	0f b6       	in	r0, 0x3f	; 63
+ 540:	0f 92       	push	r0
+ 542:	11 24       	eor	r1, r1
+ 544:	2f 93       	push	r18
+ 546:	3f 93       	push	r19
+ 548:	4f 93       	push	r20
+ 54a:	5f 93       	push	r21
+ 54c:	6f 93       	push	r22
+ 54e:	7f 93       	push	r23
+ 550:	8f 93       	push	r24
+ 552:	9f 93       	push	r25
+ 554:	af 93       	push	r26
+ 556:	bf 93       	push	r27
+ 558:	ef 93       	push	r30
+ 55a:	ff 93       	push	r31
 	uint8_t intflags = PORTC.INTFLAGS;
- 344:	e0 e4       	ldi	r30, 0x40	; 64
- 346:	f4 e0       	ldi	r31, 0x04	; 4
- 348:	81 85       	ldd	r24, Z+9	; 0x09
+ 55c:	e0 e4       	ldi	r30, 0x40	; 64
+ 55e:	f4 e0       	ldi	r31, 0x04	; 4
+ 560:	81 85       	ldd	r24, Z+9	; 0x09
 	PORTC.INTFLAGS = intflags;
- 34a:	81 87       	std	Z+9, r24	; 0x09
+ 562:	81 87       	std	Z+9, r24	; 0x09
 	mcp_cycle_LEDS();
- 34c:	71 df       	rcall	.-286    	; 0x230 <mcp_cycle_LEDS>
- 34e:	ff 91       	pop	r31
- 350:	ef 91       	pop	r30
- 352:	bf 91       	pop	r27
- 354:	af 91       	pop	r26
- 356:	9f 91       	pop	r25
- 358:	8f 91       	pop	r24
- 35a:	7f 91       	pop	r23
- 35c:	6f 91       	pop	r22
- 35e:	5f 91       	pop	r21
- 360:	4f 91       	pop	r20
- 362:	3f 91       	pop	r19
- 364:	2f 91       	pop	r18
- 366:	0f 90       	pop	r0
- 368:	0f be       	out	0x3f, r0	; 63
- 36a:	0f 90       	pop	r0
- 36c:	1f 90       	pop	r1
- 36e:	18 95       	reti
+ 564:	26 df       	rcall	.-436    	; 0x3b2 <mcp_cycle_LEDS>
+ 566:	ff 91       	pop	r31
+ 568:	ef 91       	pop	r30
+ 56a:	bf 91       	pop	r27
+ 56c:	af 91       	pop	r26
+ 56e:	9f 91       	pop	r25
+ 570:	8f 91       	pop	r24
+ 572:	7f 91       	pop	r23
+ 574:	6f 91       	pop	r22
+ 576:	5f 91       	pop	r21
+ 578:	4f 91       	pop	r20
+ 57a:	3f 91       	pop	r19
+ 57c:	2f 91       	pop	r18
+ 57e:	0f 90       	pop	r0
+ 580:	0f be       	out	0x3f, r0	; 63
+ 582:	0f 90       	pop	r0
+ 584:	1f 90       	pop	r1
+ 586:	18 95       	reti
 
-00000370 <spi_slave_deselect>:
+00000588 <rbuff4_clear>:
+#include "msg_buffer.h"
+
+void rbuff4_clear (struct rbuff4_t *buff_ptr)
+{
+ 588:	fc 01       	movw	r30, r24
+	buff_ptr->head = 0;
+ 58a:	90 81       	ld	r25, Z
+	buff_ptr->tail = 0;
+	buff_ptr->status = RB_EMPTY;
+	buff_ptr->overflow = 0;
+ 58c:	90 7c       	andi	r25, 0xC0	; 192
+ 58e:	9f 7b       	andi	r25, 0xBF	; 191
+ 590:	90 83       	st	Z, r25
+ 592:	08 95       	ret
+
+00000594 <rbuff4_inc>:
+}
+
+void rbuff4_inc (struct rbuff4_t *buff_ptr)
+{
+ 594:	fc 01       	movw	r30, r24
+	if(buff_ptr->status < RB_FULL)
+ 596:	20 81       	ld	r18, Z
+ 598:	22 95       	swap	r18
+ 59a:	2f 70       	andi	r18, 0x0F	; 15
+ 59c:	23 70       	andi	r18, 0x03	; 3
+ 59e:	30 e0       	ldi	r19, 0x00	; 0
+ 5a0:	22 30       	cpi	r18, 0x02	; 2
+ 5a2:	31 05       	cpc	r19, r1
+ 5a4:	d4 f4       	brge	.+52     	; 0x5da <rbuff4_inc+0x46>
+	{
+		buff_ptr->tail++;
+ 5a6:	80 81       	ld	r24, Z
+ 5a8:	28 2f       	mov	r18, r24
+ 5aa:	26 95       	lsr	r18
+ 5ac:	26 95       	lsr	r18
+ 5ae:	2f 5f       	subi	r18, 0xFF	; 255
+ 5b0:	23 70       	andi	r18, 0x03	; 3
+ 5b2:	92 2f       	mov	r25, r18
+ 5b4:	99 0f       	add	r25, r25
+ 5b6:	99 0f       	add	r25, r25
+ 5b8:	83 7f       	andi	r24, 0xF3	; 243
+ 5ba:	89 2b       	or	r24, r25
+ 5bc:	80 83       	st	Z, r24
+		buff_ptr->status = ((buff_ptr->tail) == buff_ptr->head) ? RB_FULL : RB_IN_USE;
+ 5be:	83 70       	andi	r24, 0x03	; 3
+ 5c0:	28 17       	cp	r18, r24
+ 5c2:	11 f0       	breq	.+4      	; 0x5c8 <rbuff4_inc+0x34>
+ 5c4:	81 e0       	ldi	r24, 0x01	; 1
+ 5c6:	01 c0       	rjmp	.+2      	; 0x5ca <rbuff4_inc+0x36>
+ 5c8:	82 e0       	ldi	r24, 0x02	; 2
+ 5ca:	98 2f       	mov	r25, r24
+ 5cc:	92 95       	swap	r25
+ 5ce:	90 7f       	andi	r25, 0xF0	; 240
+ 5d0:	80 81       	ld	r24, Z
+ 5d2:	8f 7c       	andi	r24, 0xCF	; 207
+ 5d4:	89 2b       	or	r24, r25
+ 5d6:	80 83       	st	Z, r24
+ 5d8:	08 95       	ret
+	}
+	else
+	{
+		buff_ptr->overflow = 1;
+ 5da:	80 81       	ld	r24, Z
+		buff_ptr->status = RB_ERR_OVERFLOW;
+ 5dc:	80 67       	ori	r24, 0x70	; 112
+ 5de:	80 83       	st	Z, r24
+ 5e0:	08 95       	ret
+
+000005e2 <rbuff4_dec>:
+	}
+}
+
+void rbuff4_dec (struct rbuff4_t *buff_ptr)
+{
+ 5e2:	fc 01       	movw	r30, r24
+	if (buff_ptr->status != RB_EMPTY)
+ 5e4:	80 81       	ld	r24, Z
+ 5e6:	80 73       	andi	r24, 0x30	; 48
+ 5e8:	b1 f0       	breq	.+44     	; 0x616 <rbuff4_dec+0x34>
+	{
+		buff_ptr->head++;
+ 5ea:	90 81       	ld	r25, Z
+ 5ec:	81 e0       	ldi	r24, 0x01	; 1
+ 5ee:	89 0f       	add	r24, r25
+ 5f0:	83 70       	andi	r24, 0x03	; 3
+ 5f2:	9c 7f       	andi	r25, 0xFC	; 252
+ 5f4:	98 2b       	or	r25, r24
+ 5f6:	90 83       	st	Z, r25
+		buff_ptr->status = (buff_ptr->tail == buff_ptr->head) ? RB_EMPTY : RB_IN_USE;
+ 5f8:	96 95       	lsr	r25
+ 5fa:	96 95       	lsr	r25
+ 5fc:	93 70       	andi	r25, 0x03	; 3
+ 5fe:	21 e0       	ldi	r18, 0x01	; 1
+ 600:	98 13       	cpse	r25, r24
+ 602:	01 c0       	rjmp	.+2      	; 0x606 <rbuff4_dec+0x24>
+ 604:	20 e0       	ldi	r18, 0x00	; 0
+ 606:	23 70       	andi	r18, 0x03	; 3
+ 608:	92 2f       	mov	r25, r18
+ 60a:	92 95       	swap	r25
+ 60c:	90 7f       	andi	r25, 0xF0	; 240
+ 60e:	20 81       	ld	r18, Z
+ 610:	2f 7c       	andi	r18, 0xCF	; 207
+ 612:	29 2b       	or	r18, r25
+ 614:	20 83       	st	Z, r18
+ 616:	08 95       	ret
+
+00000618 <spi_slave_deselect>:
 	return SPI_BUSY;
 }
 
 static spi_status_t spi_slave_deselect(void)
 {
 	VPORTC.OUT |= PIN3_bm;
- 370:	4b 9a       	sbi	0x09, 3	; 9
+ 618:	4b 9a       	sbi	0x09, 3	; 9
 	return spi_io.status;
 }
- 372:	80 91 01 3e 	lds	r24, 0x3E01	; 0x803e01 <spi_io>
- 376:	08 95       	ret
+ 61a:	80 91 12 3e 	lds	r24, 0x3E12	; 0x803e12 <spi_io>
+ 61e:	08 95       	ret
 
-00000378 <__vector_21>:
+00000620 <__vector_21>:
 
 	}
 }
 
 ISR(SPI0_INT_vect)
 {
- 378:	1f 92       	push	r1
- 37a:	0f 92       	push	r0
- 37c:	0f b6       	in	r0, 0x3f	; 63
- 37e:	0f 92       	push	r0
- 380:	11 24       	eor	r1, r1
- 382:	2f 93       	push	r18
- 384:	3f 93       	push	r19
- 386:	4f 93       	push	r20
- 388:	5f 93       	push	r21
- 38a:	6f 93       	push	r22
- 38c:	7f 93       	push	r23
- 38e:	8f 93       	push	r24
- 390:	9f 93       	push	r25
- 392:	af 93       	push	r26
- 394:	bf 93       	push	r27
- 396:	ef 93       	push	r30
- 398:	ff 93       	push	r31
- 39a:	cf 93       	push	r28
- 39c:	df 93       	push	r29
- 39e:	1f 92       	push	r1
- 3a0:	cd b7       	in	r28, 0x3d	; 61
- 3a2:	de b7       	in	r29, 0x3e	; 62
+ 620:	1f 92       	push	r1
+ 622:	0f 92       	push	r0
+ 624:	0f b6       	in	r0, 0x3f	; 63
+ 626:	0f 92       	push	r0
+ 628:	11 24       	eor	r1, r1
+ 62a:	2f 93       	push	r18
+ 62c:	3f 93       	push	r19
+ 62e:	4f 93       	push	r20
+ 630:	5f 93       	push	r21
+ 632:	6f 93       	push	r22
+ 634:	7f 93       	push	r23
+ 636:	8f 93       	push	r24
+ 638:	9f 93       	push	r25
+ 63a:	af 93       	push	r26
+ 63c:	bf 93       	push	r27
+ 63e:	ef 93       	push	r30
+ 640:	ff 93       	push	r31
+ 642:	cf 93       	push	r28
+ 644:	df 93       	push	r29
+ 646:	1f 92       	push	r1
+ 648:	cd b7       	in	r28, 0x3d	; 61
+ 64a:	de b7       	in	r29, 0x3e	; 62
 	register8_t int_flags = SPI0.INTFLAGS;
- 3a4:	80 91 23 08 	lds	r24, 0x0823	; 0x800823 <__TEXT_REGION_LENGTH__+0x700823>
- 3a8:	89 83       	std	Y+1, r24	; 0x01
+ 64c:	80 91 23 08 	lds	r24, 0x0823	; 0x800823 <__TEXT_REGION_LENGTH__+0x700823>
+ 650:	89 83       	std	Y+1, r24	; 0x01
 	// SPI_WRCOL_bm		write collision
 	// SPI_IF_bm		byte transfer complete
 	
 	// CURRENTLY NO COLLISION ERROR HANDLING
 	if (int_flags & SPI_WRCOL_bm) 
- 3aa:	89 81       	ldd	r24, Y+1	; 0x01
- 3ac:	86 ff       	sbrs	r24, 6
- 3ae:	05 c0       	rjmp	.+10     	; 0x3ba <__vector_21+0x42>
+ 652:	89 81       	ldd	r24, Y+1	; 0x01
+ 654:	86 ff       	sbrs	r24, 6
+ 656:	05 c0       	rjmp	.+10     	; 0x662 <__vector_21+0x42>
 	return spi_io.status;
 }
 
 static spi_status_t spi_slave_reset(void)
 {
 	spi_slave_deselect();
- 3b0:	df df       	rcall	.-66     	; 0x370 <spi_slave_deselect>
+ 658:	df df       	rcall	.-66     	; 0x618 <spi_slave_deselect>
 	// SPI_IF_bm		byte transfer complete
 	
 	// CURRENTLY NO COLLISION ERROR HANDLING
 	if (int_flags & SPI_WRCOL_bm) 
 	{
 		spi_io.status = spi_slave_reset();
- 3b2:	85 e0       	ldi	r24, 0x05	; 5
- 3b4:	80 93 01 3e 	sts	0x3E01, r24	; 0x803e01 <spi_io>
- 3b8:	1d c0       	rjmp	.+58     	; 0x3f4 <__vector_21+0x7c>
+ 65a:	85 e0       	ldi	r24, 0x05	; 5
+ 65c:	80 93 12 3e 	sts	0x3E12, r24	; 0x803e12 <spi_io>
+ 660:	1d c0       	rjmp	.+58     	; 0x69c <__vector_21+0x7c>
 	/*
 		For non-buffer mode:
 		SPI_IF_bm is set on transfer complete. Cleared on interrupt vector execution, or by SPI.INTFLAGS read followed by DATA access.
 		SPI_WRCOL is set if DATA is written before shift out is complete.
 	*/
 	*(spi_io.rx_byte_array + spi_io.byte_count) = SPI0.DATA;
- 3ba:	e1 e0       	ldi	r30, 0x01	; 1
- 3bc:	fe e3       	ldi	r31, 0x3E	; 62
- 3be:	86 81       	ldd	r24, Z+6	; 0x06
- 3c0:	90 91 24 08 	lds	r25, 0x0824	; 0x800824 <__TEXT_REGION_LENGTH__+0x700824>
- 3c4:	a3 81       	ldd	r26, Z+3	; 0x03
- 3c6:	b4 81       	ldd	r27, Z+4	; 0x04
- 3c8:	a8 0f       	add	r26, r24
- 3ca:	b1 1d       	adc	r27, r1
- 3cc:	9c 93       	st	X, r25
+ 662:	e2 e1       	ldi	r30, 0x12	; 18
+ 664:	fe e3       	ldi	r31, 0x3E	; 62
+ 666:	86 81       	ldd	r24, Z+6	; 0x06
+ 668:	90 91 24 08 	lds	r25, 0x0824	; 0x800824 <__TEXT_REGION_LENGTH__+0x700824>
+ 66c:	a3 81       	ldd	r26, Z+3	; 0x03
+ 66e:	b4 81       	ldd	r27, Z+4	; 0x04
+ 670:	a8 0f       	add	r26, r24
+ 672:	b1 1d       	adc	r27, r1
+ 674:	9c 93       	st	X, r25
 	spi_io.byte_count ++;
- 3ce:	8f 5f       	subi	r24, 0xFF	; 255
- 3d0:	86 83       	std	Z+6, r24	; 0x06
+ 676:	8f 5f       	subi	r24, 0xFF	; 255
+ 678:	86 83       	std	Z+6, r24	; 0x06
 	
 	if (spi_io.byte_count < spi_io.size_byte_array)
- 3d2:	95 81       	ldd	r25, Z+5	; 0x05
- 3d4:	89 17       	cp	r24, r25
- 3d6:	50 f4       	brcc	.+20     	; 0x3ec <__vector_21+0x74>
+ 67a:	95 81       	ldd	r25, Z+5	; 0x05
+ 67c:	89 17       	cp	r24, r25
+ 67e:	50 f4       	brcc	.+20     	; 0x694 <__vector_21+0x74>
 	{
 		SPI0.DATA = *(spi_io.tx_byte_array + spi_io.byte_count);		
- 3d8:	e0 91 02 3e 	lds	r30, 0x3E02	; 0x803e02 <spi_io+0x1>
- 3dc:	f0 91 03 3e 	lds	r31, 0x3E03	; 0x803e03 <spi_io+0x2>
- 3e0:	e8 0f       	add	r30, r24
- 3e2:	f1 1d       	adc	r31, r1
- 3e4:	80 81       	ld	r24, Z
- 3e6:	80 93 24 08 	sts	0x0824, r24	; 0x800824 <__TEXT_REGION_LENGTH__+0x700824>
- 3ea:	04 c0       	rjmp	.+8      	; 0x3f4 <__vector_21+0x7c>
+ 680:	e0 91 13 3e 	lds	r30, 0x3E13	; 0x803e13 <spi_io+0x1>
+ 684:	f0 91 14 3e 	lds	r31, 0x3E14	; 0x803e14 <spi_io+0x2>
+ 688:	e8 0f       	add	r30, r24
+ 68a:	f1 1d       	adc	r31, r1
+ 68c:	80 81       	ld	r24, Z
+ 68e:	80 93 24 08 	sts	0x0824, r24	; 0x800824 <__TEXT_REGION_LENGTH__+0x700824>
+ 692:	04 c0       	rjmp	.+8      	; 0x69c <__vector_21+0x7c>
 	return spi_io.status;
 }
 
 static spi_status_t spi_slave_reset(void)
 {
 	spi_slave_deselect();
- 3ec:	c1 df       	rcall	.-126    	; 0x370 <spi_slave_deselect>
+ 694:	c1 df       	rcall	.-126    	; 0x618 <spi_slave_deselect>
 	{
 		SPI0.DATA = *(spi_io.tx_byte_array + spi_io.byte_count);		
 	}
 	else
 	{
 		spi_io.status = spi_slave_reset();
- 3ee:	85 e0       	ldi	r24, 0x05	; 5
- 3f0:	80 93 01 3e 	sts	0x3E01, r24	; 0x803e01 <spi_io>
+ 696:	85 e0       	ldi	r24, 0x05	; 5
+ 698:	80 93 12 3e 	sts	0x3E12, r24	; 0x803e12 <spi_io>
 	else
 	{
 		spi_isr();
 	}
 	
 	SPI0.INTFLAGS = 0x00;
- 3f4:	10 92 23 08 	sts	0x0823, r1	; 0x800823 <__TEXT_REGION_LENGTH__+0x700823>
+ 69c:	10 92 23 08 	sts	0x0823, r1	; 0x800823 <__TEXT_REGION_LENGTH__+0x700823>
 }
- 3f8:	0f 90       	pop	r0
- 3fa:	df 91       	pop	r29
- 3fc:	cf 91       	pop	r28
- 3fe:	ff 91       	pop	r31
- 400:	ef 91       	pop	r30
- 402:	bf 91       	pop	r27
- 404:	af 91       	pop	r26
- 406:	9f 91       	pop	r25
- 408:	8f 91       	pop	r24
- 40a:	7f 91       	pop	r23
- 40c:	6f 91       	pop	r22
- 40e:	5f 91       	pop	r21
- 410:	4f 91       	pop	r20
- 412:	3f 91       	pop	r19
- 414:	2f 91       	pop	r18
- 416:	0f 90       	pop	r0
- 418:	0f be       	out	0x3f, r0	; 63
- 41a:	0f 90       	pop	r0
- 41c:	1f 90       	pop	r1
- 41e:	18 95       	reti
+ 6a0:	0f 90       	pop	r0
+ 6a2:	df 91       	pop	r29
+ 6a4:	cf 91       	pop	r28
+ 6a6:	ff 91       	pop	r31
+ 6a8:	ef 91       	pop	r30
+ 6aa:	bf 91       	pop	r27
+ 6ac:	af 91       	pop	r26
+ 6ae:	9f 91       	pop	r25
+ 6b0:	8f 91       	pop	r24
+ 6b2:	7f 91       	pop	r23
+ 6b4:	6f 91       	pop	r22
+ 6b6:	5f 91       	pop	r21
+ 6b8:	4f 91       	pop	r20
+ 6ba:	3f 91       	pop	r19
+ 6bc:	2f 91       	pop	r18
+ 6be:	0f 90       	pop	r0
+ 6c0:	0f be       	out	0x3f, r0	; 63
+ 6c2:	0f 90       	pop	r0
+ 6c4:	1f 90       	pop	r1
+ 6c6:	18 95       	reti
 
-00000420 <spi_master_init>:
+000006c8 <spi_master_init>:
 
 spi_status_t spi_master_init()
 {
 	// For for multiple master configuration, SS must be set as input and held high for master operation.
 	
 	PORTC.DIRCLR = PIN1_bm;
- 420:	e0 e4       	ldi	r30, 0x40	; 64
- 422:	f4 e0       	ldi	r31, 0x04	; 4
- 424:	82 e0       	ldi	r24, 0x02	; 2
- 426:	82 83       	std	Z+2, r24	; 0x02
+ 6c8:	e0 e4       	ldi	r30, 0x40	; 64
+ 6ca:	f4 e0       	ldi	r31, 0x04	; 4
+ 6cc:	82 e0       	ldi	r24, 0x02	; 2
+ 6ce:	82 83       	std	Z+2, r24	; 0x02
 	PORTC.DIRSET = PIN0_bm | PIN2_bm | PIN3_bm; // Set SCK, MOSI and SS as outputs (Alternate pins). SCK is also onboard LED for eval board.
- 428:	8d e0       	ldi	r24, 0x0D	; 13
- 42a:	81 83       	std	Z+1, r24	; 0x01
+ 6d0:	8d e0       	ldi	r24, 0x0D	; 13
+ 6d2:	81 83       	std	Z+1, r24	; 0x01
 	VPORTC.OUT &= ~PIN0_bm; // Set SCK low
- 42c:	48 98       	cbi	0x09, 0	; 9
+ 6d4:	48 98       	cbi	0x09, 0	; 9
 	return spi_io.status;
 }
 
 static spi_status_t spi_slave_reset(void)
 {
 	spi_slave_deselect();
- 42e:	a0 df       	rcall	.-192    	; 0x370 <spi_slave_deselect>
+ 6d6:	a0 df       	rcall	.-192    	; 0x618 <spi_slave_deselect>
 	// For for multiple master configuration, SS must be set as input and held high for master operation.
 	
 	PORTC.DIRCLR = PIN1_bm;
 	PORTC.DIRSET = PIN0_bm | PIN2_bm | PIN3_bm; // Set SCK, MOSI and SS as outputs (Alternate pins). SCK is also onboard LED for eval board.
 	VPORTC.OUT &= ~PIN0_bm; // Set SCK low
 	spi_io.status = spi_slave_reset();
- 430:	a1 e0       	ldi	r26, 0x01	; 1
- 432:	be e3       	ldi	r27, 0x3E	; 62
- 434:	85 e0       	ldi	r24, 0x05	; 5
- 436:	8c 93       	st	X, r24
+ 6d8:	a2 e1       	ldi	r26, 0x12	; 18
+ 6da:	be e3       	ldi	r27, 0x3E	; 62
+ 6dc:	85 e0       	ldi	r24, 0x05	; 5
+ 6de:	8c 93       	st	X, r24
 	
 	// Setup for non-buffer mode.
 	SPI0.CTRLB = 0<<SPI_BUFEN_bp | 
- 438:	e0 e2       	ldi	r30, 0x20	; 32
- 43a:	f8 e0       	ldi	r31, 0x08	; 8
- 43c:	84 e4       	ldi	r24, 0x44	; 68
- 43e:	81 83       	std	Z+1, r24	; 0x01
+ 6e0:	e0 e2       	ldi	r30, 0x20	; 32
+ 6e2:	f8 e0       	ldi	r31, 0x08	; 8
+ 6e4:	84 e4       	ldi	r24, 0x44	; 68
+ 6e6:	81 83       	std	Z+1, r24	; 0x01
 				1<<SPI_BUFWR_bp | 
 				1<<SPI_SSD_bp | 
 				SPI_MODE_0_gc; // Disable multi-master for now
 	SPI0.INTCTRL = SPI_IE_bm; // Buffer mode disabled, use this interrupt.	
- 440:	81 e0       	ldi	r24, 0x01	; 1
- 442:	82 83       	std	Z+2, r24	; 0x02
+ 6e8:	81 e0       	ldi	r24, 0x01	; 1
+ 6ea:	82 83       	std	Z+2, r24	; 0x02
 	SPI0.CTRLA = 0<<SPI_DORD_bp | // Transmit MSB first
- 444:	85 e2       	ldi	r24, 0x25	; 37
- 446:	80 83       	st	Z, r24
+ 6ec:	85 e2       	ldi	r24, 0x25	; 37
+ 6ee:	80 83       	st	Z, r24
 				0<<SPI_CLK2X_bp | 
 				SPI_PRESC_DIV64_gc | 
 				1<<SPI_ENABLE_bp;
 				
 	return spi_io.status;
 }
- 448:	8c 91       	ld	r24, X
- 44a:	08 95       	ret
+ 6f0:	8c 91       	ld	r24, X
+ 6f2:	08 95       	ret
 
-0000044c <spi_start>:
+000006f4 <spi_start>:
 
-spi_status_t spi_start (const uint8_t *tx_buff, uint8_t *rx_buff, uint8_t size)
+spi_status_t spi_start (const uint8_t *tx_buff, uint8_t *rx_buff, uint8_t byte_count)
 {
- 44c:	fc 01       	movw	r30, r24
+ 6f4:	fc 01       	movw	r30, r24
 	spi_status_t spi_state = SPI_IDLE;
 	switch(spi_io.status)
- 44e:	90 91 01 3e 	lds	r25, 0x3E01	; 0x803e01 <spi_io>
- 452:	95 30       	cpi	r25, 0x05	; 5
- 454:	b1 f4       	brne	.+44     	; 0x482 <spi_start+0x36>
+ 6f6:	90 91 12 3e 	lds	r25, 0x3E12	; 0x803e12 <spi_io>
+ 6fa:	95 30       	cpi	r25, 0x05	; 5
+ 6fc:	b1 f4       	brne	.+44     	; 0x72a <spi_start+0x36>
 
 static struct spi_data spi_io = {.status = SPI_IDLE, .tx_byte_array = NULL, .rx_byte_array = NULL, .size_byte_array = 0, .byte_count = 0};
 
 static spi_status_t spi_slave_select(void)
 {
 	VPORTC.OUT &= ~PIN3_bm; // Set SS low
- 456:	4b 98       	cbi	0x09, 3	; 9
+ 6fe:	4b 98       	cbi	0x09, 3	; 9
 	spi_status_t spi_state = SPI_IDLE;
 	switch(spi_io.status)
 	{
 		case SPI_IDLE:
 			// No multi-master -> no check that bus already in use
 			spi_io.status = spi_slave_select();
- 458:	a1 e0       	ldi	r26, 0x01	; 1
- 45a:	be e3       	ldi	r27, 0x3E	; 62
- 45c:	1c 92       	st	X, r1
+ 700:	a2 e1       	ldi	r26, 0x12	; 18
+ 702:	be e3       	ldi	r27, 0x3E	; 62
+ 704:	1c 92       	st	X, r1
 			spi_io.tx_byte_array = tx_buff;
- 45e:	11 96       	adiw	r26, 0x01	; 1
- 460:	ed 93       	st	X+, r30
- 462:	fc 93       	st	X, r31
- 464:	12 97       	sbiw	r26, 0x02	; 2
+ 706:	11 96       	adiw	r26, 0x01	; 1
+ 708:	ed 93       	st	X+, r30
+ 70a:	fc 93       	st	X, r31
+ 70c:	12 97       	sbiw	r26, 0x02	; 2
 			spi_io.rx_byte_array = rx_buff;
- 466:	13 96       	adiw	r26, 0x03	; 3
- 468:	6d 93       	st	X+, r22
- 46a:	7c 93       	st	X, r23
- 46c:	14 97       	sbiw	r26, 0x04	; 4
-			spi_io.size_byte_array = size;
- 46e:	15 96       	adiw	r26, 0x05	; 5
- 470:	4c 93       	st	X, r20
- 472:	15 97       	sbiw	r26, 0x05	; 5
+ 70e:	13 96       	adiw	r26, 0x03	; 3
+ 710:	6d 93       	st	X+, r22
+ 712:	7c 93       	st	X, r23
+ 714:	14 97       	sbiw	r26, 0x04	; 4
+			spi_io.size_byte_array = byte_count;
+ 716:	15 96       	adiw	r26, 0x05	; 5
+ 718:	4c 93       	st	X, r20
+ 71a:	15 97       	sbiw	r26, 0x05	; 5
 			spi_io.byte_count = 0;
- 474:	16 96       	adiw	r26, 0x06	; 6
- 476:	1c 92       	st	X, r1
+ 71c:	16 96       	adiw	r26, 0x06	; 6
+ 71e:	1c 92       	st	X, r1
 			SPI0.DATA = *spi_io.tx_byte_array;
- 478:	80 81       	ld	r24, Z
- 47a:	80 93 24 08 	sts	0x0824, r24	; 0x800824 <__TEXT_REGION_LENGTH__+0x700824>
+ 720:	80 81       	ld	r24, Z
+ 722:	80 93 24 08 	sts	0x0824, r24	; 0x800824 <__TEXT_REGION_LENGTH__+0x700824>
 			spi_state = spi_io.status;
- 47e:	80 e0       	ldi	r24, 0x00	; 0
+ 726:	80 e0       	ldi	r24, 0x00	; 0
 			break;
- 480:	08 95       	ret
+ 728:	08 95       	ret
 		default:
 			spi_io.status = SPI_TX_BUFF_ERR;
- 482:	82 e0       	ldi	r24, 0x02	; 2
- 484:	80 93 01 3e 	sts	0x3E01, r24	; 0x803e01 <spi_io>
+ 72a:	82 e0       	ldi	r24, 0x02	; 2
+ 72c:	80 93 12 3e 	sts	0x3E12, r24	; 0x803e12 <spi_io>
 	return spi_io.status;
 }
 
-spi_status_t spi_start (const uint8_t *tx_buff, uint8_t *rx_buff, uint8_t size)
+spi_status_t spi_start (const uint8_t *tx_buff, uint8_t *rx_buff, uint8_t byte_count)
 {
 	spi_status_t spi_state = SPI_IDLE;
- 488:	85 e0       	ldi	r24, 0x05	; 5
+ 730:	85 e0       	ldi	r24, 0x05	; 5
 		default:
 			spi_io.status = SPI_TX_BUFF_ERR;
 			break;
 	}
 	return spi_state;
 }
- 48a:	08 95       	ret
+ 732:	08 95       	ret
 
-0000048c <_exit>:
- 48c:	f8 94       	cli
+00000734 <_exit>:
+ 734:	f8 94       	cli
 
-0000048e <__stop_program>:
- 48e:	ff cf       	rjmp	.-2      	; 0x48e <__stop_program>
+00000736 <__stop_program>:
+ 736:	ff cf       	rjmp	.-2      	; 0x736 <__stop_program>

@@ -16,5 +16,5 @@ typedef enum SPI_status_enum
 } spi_status_t;
 
 spi_status_t spi_master_init();
-spi_status_t spi_start (const uint8_t *tx_buff, uint8_t *rx_buff, uint8_t size);
+spi_status_t spi_start (const uint8_t *tx_buff, uint8_t *rx_buff, uint8_t byte_count);
 spi_status_t get_spi_status (void);

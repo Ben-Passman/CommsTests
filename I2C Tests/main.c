@@ -14,7 +14,7 @@
 	- User button is low-active on PC5, with external pullup.
 	
 	Notes:
-	- MCP23X17 require reset on output pins before use. Default register values following a reset do not enable output pins.
+	- MCP23X17 require reset on output pins before use. Pins are input by default.
 */
 
 #include <avr/io.h>
@@ -22,20 +22,41 @@
 #include "MCP23X17.h"
 #include "i2c_master.h"
 #include "spi_master.h"
+#include "msg_buffer.h"
 
 #define I2C_ADDR_1 0x20
 #define SPI_ADDR 0x20
+
+#define BUFF_SIZE 4
 #define I2C_BUFF_LENGTH 16
 #define SPI_BUFF_LENGTH 4
+#define SPI_SETUP (const uint8_t *)0x1400 // MCP23X17 settings from EEPROM
+#define I2C_SETUP (uint8_t *)0x1401
+
+struct message
+{
+	uint8_t addr : 7;
+	uint8_t rw : 1;
+	uint8_t *data;
+	uint8_t data_len;
+};
 
 static uint8_t LED_test = 0x67;
-static uint8_t i2c_bytes[I2C_BUFF_LENGTH];
+static uint8_t INTCAP_ADDR = PORTB_ADDR(INTCAP, SEQ_ADDR);
+static struct rbuff4_t i2c_buff;
+static struct message i2c_msgs[4];
+static uint8_t i2c_rx_buffer;
+static uint8_t i2c_tx_buffer[I2C_BUFF_LENGTH] = {PORTA_ADDR(OLAT, SEQ_ADDR), 0};
 static uint8_t spi_bytes[SPI_BUFF_LENGTH];
-//static uint8_t i2c_buff[I2C_BUFF_LENGTH];
-//static uint8_t spi_buff[SPI_BUFF_LENGTH];
 
-static uint8_t int_counter = 0;
-static uint8_t read_counter = 0;
+void queue_msg(uint8_t addr, uint8_t rw, uint8_t *data, uint8_t data_count, struct message *msgs, struct rbuff4_t *buff)
+{
+	(msgs + buff->tail)->addr = addr;
+	(msgs + buff->tail)->rw = rw;
+	(msgs + buff->tail)->data = data;
+	(msgs + buff->tail)->data_len = data_count;
+	rbuff4_inc(buff);
+}
 
 uint8_t system_init(void) 
 {
@@ -58,22 +79,47 @@ uint8_t system_init(void)
 	return 0;
 }
 
-void mcp_write_callback(void)
+/*	****************	USART setup for debugging	****************	*/
+// 20MHz clock, 6x prescaler -> 3.333MHz CLK_PER
+//#define F_CPU (20E6/2)
+//#define BAUD_RATE 57600
+void usart_init()
 {
-	
+	USART0.CTRLB = USART_TXEN_bm;
+	USART0.BAUD = 231; //(3333333 * 64.0) / (BAUD_RATE * 16.0);
 }
-
-void mcp_read_callback(void)
+void usart_put_c(uint8_t c)
 {
-	spi_bytes[0] = SPI_ADDR<<1 | MCP23X17_WRITE;
-	spi_bytes[1] = PORTA_ADDR(OLAT, SEQ_ADDR);
-	spi_bytes[2] = (spi_bytes[2] & 0x01)<<7 |		// PORTB PIN0 -> PORTA PIN7
-					(spi_bytes[2] & 0x04)<<4 |	// PORTB PIN2 -> PORTA PIN6
-					(spi_bytes[2] & 0x10)<<1 |	// PORTB PIN4 -> PORTA PIN5
-					(spi_bytes[2] & 0x40)>>2;	// PORTB PIN6 -> PORTA PIN4
-	spi_start(spi_bytes, spi_bytes, 3); // Write to MCP23X17, no callback required
+	VPORTB.DIR |= PIN2_bm | PIN6_bm;  //picoPower 2b: see Disable Tx below
+	USART0.STATUS = USART_TXCIF_bm;
 	
-	
+	VPORTB.OUT |= PIN6_bm;
+	USART0.TXDATAL = c;
+	while(!(USART0.STATUS & USART_TXCIF_bm));
+	VPORTB.OUT &= ~PIN6_bm;
+	VPORTB.DIR &= ~PIN2_bm | PIN6_bm;
+	//picoPower 2b: Disable Tx pin in-between transmissions
+}
+/*	********************************		********************************	*/
+
+void mcp_i2c_callback(void)
+{
+	// Called when TX/RX complete. Check data buffer and trigger restart if appropriate.
+	if(i2c_msgs[i2c_buff.head].rw == 1)
+	{
+		i2c_tx_buffer[1] = i2c_rx_buffer;
+		queue_msg(I2C_ADDR_1, I2C_WRITE_bm, i2c_tx_buffer, 2, i2c_msgs, &i2c_buff);
+	}
+	rbuff4_dec(&i2c_buff);
+	if(i2c_buff.status != RB_EMPTY)
+	{
+		i2c_set_buffer(i2c_msgs[i2c_buff.head].addr<<1 | i2c_msgs[i2c_buff.head].rw, i2c_msgs[i2c_buff.head].data, i2c_msgs[i2c_buff.head].data_len);
+		i2c_set_restart();
+	}
+	else
+	{
+		i2c_set_stop();
+	}
 }
 
 void mcp_cycle_LEDS(void)
@@ -84,36 +130,45 @@ void mcp_cycle_LEDS(void)
 	spi_bytes[2] = LED_test;
 	spi_start(spi_bytes, spi_bytes, 3);
 
-	i2c_bytes[0] = PORTA_ADDR(OLAT, SEQ_ADDR);
-	i2c_bytes[1] = LED_test;
-	i2c_start(I2C_ADDR_1, I2C_WRITE_bm, i2c_bytes, 2);
+	// Buffer may be overwritten this way if queue is large. Use separate Read/Write buffers.
+	i2c_tx_buffer[1] = LED_test;
+	queue_msg(I2C_ADDR_1, I2C_WRITE_bm, i2c_tx_buffer, 2, i2c_msgs, &i2c_buff);
+	
+	if(i2c_idle())
+	{
+		i2c_set_buffer(i2c_msgs[i2c_buff.head].addr<<1 | i2c_msgs[i2c_buff.head].rw, i2c_msgs[i2c_buff.head].data, i2c_msgs[i2c_buff.head].data_len);
+		i2c_start(mcp_i2c_callback);	
+	}
+	
 }
 
 void mcp_read_inputs(void)
 {
 	spi_bytes[0] = SPI_ADDR<<1 | MCP23X17_READ;
 	spi_bytes[1] = PORTB_ADDR(INTCAP, SEQ_ADDR);
-	// Counters confirm reads are being missed, possible data collision...
-	// Need to check for busy status and queue messages.
-	int_counter++;
-	if (spi_start(spi_bytes, spi_bytes, 3) == SPI_BUSY)
-	{
-		read_counter++;
-	}
+	spi_start(spi_bytes, spi_bytes, 3);
 	
 // I2C read requires write to select register, then restart to transfer.
-//	i2c_bytes[0] = PORTB_ADDR(INTCAP, SEQ_ADDR);
-//	i2c_start(I2C_ADDR_1, I2C_WRITE_bm, i2c_bytes, 2); // Select register to read, then do restart
-	i2c_start(I2C_ADDR_1, I2C_READ_bm, i2c_bytes, 16); // NEED TO CLEAN UP I2C READ FUNCTIONS
+	queue_msg(I2C_ADDR_1, I2C_WRITE_bm, &INTCAP_ADDR, 1, i2c_msgs, &i2c_buff);
+	queue_msg(I2C_ADDR_1, I2C_READ_bm, &i2c_rx_buffer, 1, i2c_msgs, &i2c_buff);
+	
+	if(i2c_idle())
+	{
+		i2c_set_buffer(i2c_msgs[i2c_buff.head].addr<<1 | i2c_msgs[i2c_buff.head].rw, i2c_msgs[i2c_buff.head].data, i2c_msgs[i2c_buff.head].data_len);
+		i2c_start(mcp_i2c_callback);	
+	}
 }
 
 int main(void)
 {
-	uint8_t spi_rx_temp[16];
+	uint8_t spi_rx_temp[16]; // Used once, should free up this memory after use.
 	
 	system_init();
-	spi_start((const uint8_t *)0x1400, spi_rx_temp, 16); // Read MCP23X17 settings from EEPROM	
-	i2c_start(I2C_ADDR_1, I2C_WRITE_bm, (uint8_t *)0x1401, 15);
+	usart_init();
+	rbuff4_clear(&i2c_buff);
+	spi_start(SPI_SETUP, spi_rx_temp, 16); // Read MCP23X17 settings from EEPROM	
+	i2c_set_buffer((I2C_ADDR_1<<1) | I2C_WRITE_bm, I2C_SETUP, 15);
+	i2c_start(mcp_i2c_callback);
 
 	while (1)
     {

@@ -14,7 +14,11 @@
 */
 
 // BAUD = (F_CLK_PER/F_SCL - 10 - F_CLK_PER*T_RISE)/2;
-#define BAUD 0x0B
+#define I2C_BAUD 0x0B
 
 void i2c_master_init();
-void i2c_start (register8_t addr, register8_t read_write, uint8_t *data, uint8_t data_size);
+void i2c_set_stop();
+void i2c_set_restart();
+void i2c_set_buffer(uint8_t slave_addr, uint8_t *data, uint8_t byte_count);
+void i2c_start (void (*callback)(void));
+uint8_t i2c_idle();

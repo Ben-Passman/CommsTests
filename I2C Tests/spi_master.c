@@ -101,7 +101,7 @@ spi_status_t spi_master_init()
 	return spi_io.status;
 }
 
-spi_status_t spi_start (const uint8_t *tx_buff, uint8_t *rx_buff, uint8_t size)
+spi_status_t spi_start (const uint8_t *tx_buff, uint8_t *rx_buff, uint8_t byte_count)
 {
 	spi_status_t spi_state = SPI_IDLE;
 	switch(spi_io.status)
@@ -111,7 +111,7 @@ spi_status_t spi_start (const uint8_t *tx_buff, uint8_t *rx_buff, uint8_t size)
 			spi_io.status = spi_slave_select();
 			spi_io.tx_byte_array = tx_buff;
 			spi_io.rx_byte_array = rx_buff;
-			spi_io.size_byte_array = size;
+			spi_io.size_byte_array = byte_count;
 			spi_io.byte_count = 0;
 			SPI0.DATA = *spi_io.tx_byte_array;
 			spi_state = spi_io.status;
