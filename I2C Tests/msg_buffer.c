@@ -1,32 +1,57 @@
 #include "msg_buffer.h"
 
-void rbuff4_clear (struct rbuff4_t *buff_ptr)
+static struct ring_buffer rb = {.head=0, .tail=0, .status=RB_EMPTY, .overflow=0};
+
+uint8_t get_current_address(void){	return rb.msg_list[rb.head].addr;	}
+
+uint8_t get_current_rw_flag(void){	return rb.msg_list[rb.head].rw;	}
+
+uint8_t *get_current_data_pointer(void){	return rb.msg_list[rb.head].data;	}
+
+uint8_t get_current_data_length(void){	return rb.msg_list[rb.head].data_len;	}
+
+uint8_t get_msg_queue_overflow(void){	return rb.overflow;	}
+
+buff_state_t get_msg_queue_status(void){	return rb.status;	}
+
+void clear_msg_overflow (void){	rb.overflow = 0;	}
+
+void clear_msg_queue (void)
 {
-	buff_ptr->head = 0;
-	buff_ptr->tail = 0;
-	buff_ptr->status = RB_EMPTY;
-	buff_ptr->overflow = 0;
+	rb.head = 0;
+	rb.tail = 0;
+	rb.status = RB_EMPTY;
+	clear_msg_overflow();
 }
 
-void rbuff4_inc (struct rbuff4_t *buff_ptr)
+void increment_ring_buffer (void)
 {
-	if(buff_ptr->status < RB_FULL)
+	if(rb.status < RB_FULL)
 	{
-		buff_ptr->tail++;
-		buff_ptr->status = ((buff_ptr->tail) == buff_ptr->head) ? RB_FULL : RB_IN_USE;
+		if(++rb.tail > BUFFER_SIZE) rb.tail = BUFFER_SIZE;
+		rb.status = ((rb.tail) == rb.head) ? RB_FULL : RB_IN_USE;
 	}
 	else
 	{
-		buff_ptr->overflow = 1;
-		buff_ptr->status = RB_ERR_OVERFLOW;
+		rb.overflow = 1;
+		rb.status = RB_ERR_OVERFLOW;
 	}
 }
 
-void rbuff4_dec (struct rbuff4_t *buff_ptr)
+void delete_from_msg_queue (void)
 {
-	if (buff_ptr->status != RB_EMPTY)
+	if (rb.status != RB_EMPTY)
 	{
-		buff_ptr->head++;
-		buff_ptr->status = (buff_ptr->tail == buff_ptr->head) ? RB_EMPTY : RB_IN_USE;
+		if(++rb.head > BUFFER_SIZE) rb.head = BUFFER_SIZE;
+		rb.status = (rb.tail == rb.head) ? RB_EMPTY : RB_IN_USE;
 	}
+}
+
+void add_to_msg_queue (uint8_t addr, uint8_t rw, uint8_t *data, uint8_t data_count)
+{
+	rb.msg_list[rb.tail].addr = addr;
+	rb.msg_list[rb.tail].rw = rw;
+	rb.msg_list[rb.tail].data = data;
+	rb.msg_list[rb.tail].data_len = data_count;
+	increment_ring_buffer();
 }
