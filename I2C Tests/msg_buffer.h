@@ -28,18 +28,11 @@ typedef enum buff_state {
 	RB_ERR_OVERFLOW
 } buff_state_t;
 
-uint8_t get_current_address(void);
-uint8_t get_current_rw_flag(void);
-uint8_t *get_current_data_pointer(void);
-uint8_t get_current_data_length(void);
-uint8_t get_msg_queue_overflow(void);
-buff_state_t get_msg_queue_status(void);
-void clear_msg_overflow (void);
-void clear_msg_queue (void);
-void add_to_msg_queue (uint8_t addr, uint8_t rw, uint8_t *data, uint8_t data_count);
-void delete_from_msg_queue (void);
+#define Q_ADDR(b) b.msg_list[b.head].addr //get_current_address()
+#define Q_RW(b) b.msg_list[b.head].rw // get_current_rw_flag()
+#define Q_DATA(b) b.msg_list[b.head].data // get_current_data_pointer()
+#define Q_DATA_LEN(b) b.msg_list[b.head].data_len // get_current_data_length()
 
-#define Q_ADDR get_current_address()
-#define Q_RW get_current_rw_flag()
-#define Q_DATA get_current_data_pointer()
-#define Q_DATA_LEN get_current_data_length()
+void clear_msg_queue (struct ring_buffer *rb);
+void add_to_msg_queue (struct ring_buffer *rb, uint8_t addr, uint8_t rw, uint8_t *data, uint8_t data_count);
+void delete_from_msg_queue (struct ring_buffer *rb);
