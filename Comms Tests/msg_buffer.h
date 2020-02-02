@@ -28,10 +28,10 @@ typedef enum buff_state {
 	RB_ERR_OVERFLOW
 } buff_state_t;
 
-#define Q_ADDR(b) b.msg_list[b.head].addr //get_current_address()
-#define Q_RW(b) b.msg_list[b.head].rw // get_current_rw_flag()
-#define Q_DATA(b) b.msg_list[b.head].data // get_current_data_pointer()
-#define Q_DATA_LEN(b) b.msg_list[b.head].data_len // get_current_data_length()
+#define Q_ADDR(b) b.msg_list[b.head].addr
+#define Q_RW(b) b.msg_list[b.head].rw
+#define Q_DATA(b) b.msg_list[b.head].data
+#define Q_DATA_LEN(b) b.msg_list[b.head].data_len
 
 void clear_msg_queue (struct ring_buffer *rb);
 void add_to_msg_queue (struct ring_buffer *rb, uint8_t addr, uint8_t rw, uint8_t *data, uint8_t data_count);

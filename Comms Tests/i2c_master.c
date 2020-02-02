@@ -19,7 +19,6 @@ typedef enum I2C_states_enum
 
 //typedef void(*callback)(void);
 typedef i2c_states_t(*fsm_function)(void);
-typedef i2c_operations_t(*event_callback)(void);
 
 struct i2c_data
 {
@@ -28,7 +27,7 @@ struct i2c_data
 	uint8_t size_byte_array;
 	uint8_t byte_count;
 	i2c_states_t state;
-	event_callback event_callbacks[6];
+	i2c_event_callback event_callbacks[6];
 };
 
 static struct i2c_data i2c_fsm = {.slave_addr = 0, .byte_array = NULL, .size_byte_array = 0, .byte_count = 0, .state = I2C_IDLE};
@@ -87,12 +86,11 @@ static i2c_states_t I2C_M_START(void)
 
 static i2c_states_t I2C_M_RESTART(void)
 {
-	/*i2c_fsm.byte_count = 0;
-	TWI0.MCTRLB |= TWI_MCMD_REPSTART_gc | TWI_ACKACT_bm;
-			
-	return I2C_ADDR_ACK;*/
+	I2C_M_START();
 	
-	return I2C_M_START(); // Always update MADDR on restart
+	// TWI0.MCTRLB |= TWI_MCMD_REPSTART_gc | TWI_ACKACT_bm; // SHOULD HAVE RESTARTED FROM MADDR WRITE?
+			
+	return I2C_ADDR_ACK;
 }
 
 static i2c_states_t I2C_M_STOP(void)
@@ -260,7 +258,7 @@ ISR(TWI0_TWIM_vect)
 /*	------------------------------------------------------------------------------------------------
 	Default Callbacks
 	
-	Don't do anything other than determine the next state for the FSM.
+	Don't do anything other than specify the next state for the FSM.
 	------------------------------------------------------------------------------------------------	*/
 
 	i2c_operations_t stop_cb (void)
@@ -302,7 +300,7 @@ void i2c_master_init()
 	i2c_fsm.state = I2C_IDLE;
 }
 
-void i2c_set_event_callback(i2c_events_t ev, event_callback cb)
+void i2c_set_event_callback(i2c_events_t ev, i2c_event_callback cb)
 {
 	i2c_fsm.event_callbacks[ev] = cb;
 }
@@ -316,8 +314,11 @@ void i2c_set_buffer(uint8_t slave_addr, uint8_t *data, uint8_t byte_count)
 
 void i2c_start ()
 {
-	i2c_fsm.state = I2C_START;
-	i2c_state_isr();
+	if(i2c_fsm.state == I2C_IDLE)
+	{
+		i2c_fsm.state = I2C_START;
+		i2c_state_isr();	
+	}
 }
 
 uint8_t i2c_idle ()

@@ -1,5 +1,6 @@
 /*
- * I2C Tests.c
+ * Comms Tests
+ * main.c
  *
  * Created: 13/10/2019 10:34:51 AM
  * Author : Ben
@@ -34,8 +35,9 @@
 #define I2C_SETUP (uint8_t *)0x1401
 
 static uint8_t LED_test = 0x67;
-static uint8_t INTCAP_ADDR = PORTB_ADDR(INTCAP, SEQ_ADDR);
+static uint8_t target_reg;
 static uint8_t i2c_rx_buffer;
+// static uint8_t spi_rx_buffer;
 static uint8_t i2c_tx_buffer[I2C_BUFF_LENGTH];
 static struct ring_buffer i2c_rb = {.head=0, .tail=0, .status=RB_EMPTY, .overflow=0};
 static uint8_t spi_bytes[SPI_BUFF_LENGTH];
@@ -85,17 +87,19 @@ void usart_put_c(uint8_t c)
 }
 	********************************		********************************	*/
 
-i2c_operations_t i2c_data_complete_cb (void)
+/*	********************************************************************************
+	I2C Callback functions
+	********************************************************************************	*/
+
+i2c_operations_t i2c_rx_cb (void)
 {
 	i2c_operations_t next_op = stop_i2c;
-	
-	/*if(Q_RW(i2c_rb) == 1)
-	{
-		i2c_tx_buffer[0] = PORTA_ADDR(OLAT, SEQ_ADDR);
-		i2c_tx_buffer[1] = i2c_rx_buffer;
-		add_to_msg_queue(&i2c_rb, I2C_ADDR_1, I2C_WRITE_bm, i2c_tx_buffer, 2);
-	}*/
 	delete_from_msg_queue(&i2c_rb);
+
+/*i2c_tx_buffer[0] = PORTA_ADDR(OLAT, SEQ_ADDR);
+i2c_tx_buffer[1] = (i2c_rx_buffer&0x01)<<7 | (i2c_rx_buffer&0x04)<<4 | (i2c_rx_buffer&0x10)<<1 | (i2c_rx_buffer&0x40)>>2;
+add_to_msg_queue(&i2c_rb, I2C_ADDR_1, I2C_WRITE_bm, i2c_tx_buffer, 2);*/
+	
 	if(i2c_rb.status != RB_EMPTY)
 	{
 		i2c_set_buffer(Q_ADDR(i2c_rb)<<1 | Q_RW(i2c_rb), Q_DATA(i2c_rb), Q_DATA_LEN(i2c_rb));
@@ -105,6 +109,24 @@ i2c_operations_t i2c_data_complete_cb (void)
 	return next_op;
 }
 
+i2c_operations_t i2c_tx_cb (void)
+{
+	i2c_operations_t next_op = stop_i2c;
+	delete_from_msg_queue(&i2c_rb);
+
+	if(i2c_rb.status != RB_EMPTY)
+	{
+		i2c_set_buffer(Q_ADDR(i2c_rb)<<1 | Q_RW(i2c_rb), Q_DATA(i2c_rb), Q_DATA_LEN(i2c_rb));
+		next_op = restart_i2c;
+	}
+	
+	return next_op;
+}
+
+/*	************************************************************************************************
+
+	************************************************************************************************	*/
+
 void mcp_cycle_LEDS(void)
 {
 	LED_test = LED_test >> 7 | LED_test << 1;
@@ -113,7 +135,6 @@ void mcp_cycle_LEDS(void)
 	spi_bytes[2] = LED_test;
 	spi_start(spi_bytes, spi_bytes, 3);
 
-	// Buffer may be overwritten this way if queue is large. Use separate Read/Write buffers.
 	i2c_tx_buffer[0] = PORTA_ADDR(OLAT, SEQ_ADDR);
 	i2c_tx_buffer[1] = LED_test;
 	add_to_msg_queue(&i2c_rb, I2C_ADDR_1, I2C_WRITE_bm, i2c_tx_buffer, 2);
@@ -132,9 +153,9 @@ void mcp_read_inputs(void)
 	spi_bytes[1] = PORTB_ADDR(INTCAP, SEQ_ADDR);
 	spi_start(spi_bytes, spi_bytes, 3);
 	
-// I2C read requires write to select register, then restart to transfer.
-	add_to_msg_queue(&i2c_rb, I2C_ADDR_1, I2C_WRITE_bm, &INTCAP_ADDR, 1);
-	add_to_msg_queue(&i2c_rb, I2C_ADDR_1, I2C_READ_bm, &i2c_rx_buffer, 1);
+	target_reg = PORTB_ADDR(GPIO, SEQ_ADDR); // INTCAP, SEQ_ADDR);
+	add_to_msg_queue(&i2c_rb, I2C_ADDR_1, I2C_WRITE_bm, &target_reg, 1);	// Select register
+	add_to_msg_queue(&i2c_rb, I2C_ADDR_1, I2C_READ_bm, &i2c_rx_buffer, 1);	// Read
 	
 	if(i2c_idle())
 	{
@@ -143,20 +164,20 @@ void mcp_read_inputs(void)
 	}
 }
 
-ISR(PORTA_PORT_vect)
+ISR(PORTA_PORT_vect) // MCP PORTB interrupts, PINA4 -> SPI, PINA5 -> I2C
 {
 	uint8_t intflags = PORTA.INTFLAGS;
 	PORTA.INTFLAGS = intflags;
-	
-	// MCP PORTB interrupt, PINA4 -> SPI, PINA5 -> I2C
-	mcp_read_inputs();
+	//mcp_read_inputs();
+	mcp_cycle_LEDS();
 }
 
 ISR(PORTC_PORT_vect) // Eval board button
 {
 	uint8_t intflags = PORTC.INTFLAGS;
 	PORTC.INTFLAGS = intflags;
-	mcp_cycle_LEDS();
+	//mcp_cycle_LEDS();
+	mcp_read_inputs();
 }
 
 int main(void)
@@ -166,19 +187,14 @@ int main(void)
 	system_init();
 //	usart_init();
 	clear_msg_queue(&i2c_rb);
-	i2c_set_event_callback(tx_complete, i2c_data_complete_cb);
-	i2c_set_event_callback(rx_complete, i2c_data_complete_cb);
+	i2c_set_event_callback(tx_complete, i2c_tx_cb);
+	i2c_set_event_callback(rx_complete, i2c_rx_cb);
 	spi_start(SPI_SETUP, spi_rx_temp, 16); // Read MCP23X17 settings from EEPROM	
 	i2c_set_buffer((I2C_ADDR_1<<1) | I2C_WRITE_bm, I2C_SETUP, 15);
 	i2c_start();
 
 	while (1)
     {
-		if((VPORTB.IN & PIN5_bm)&&(i2c_rb.status==RB_EMPTY)&&i2c_idle())
-		{
-			add_to_msg_queue(&i2c_rb, I2C_ADDR_1, I2C_WRITE_bm, &INTCAP_ADDR, 1);
-			add_to_msg_queue(&i2c_rb, I2C_ADDR_1, I2C_READ_bm, &i2c_rx_buffer, 1);
-			i2c_start();
-		}
+
     }
 }
