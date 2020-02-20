@@ -96,7 +96,7 @@ i2c_operations_t i2c_rx_cb (void)
 	i2c_operations_t next_op = stop_i2c;
 	delete_from_msg_queue(&i2c_rb);
 
-/*i2c_tx_buffer[0] = PORTA_ADDR(OLAT, SEQ_ADDR);
+/*i2c_tx_buffer[0] = PORTA_ADDR(OLAT, SEQ_MODE);
 i2c_tx_buffer[1] = (i2c_rx_buffer&0x01)<<7 | (i2c_rx_buffer&0x04)<<4 | (i2c_rx_buffer&0x10)<<1 | (i2c_rx_buffer&0x40)>>2;
 add_to_msg_queue(&i2c_rb, I2C_ADDR_1, I2C_WRITE_bm, i2c_tx_buffer, 2);*/
 	
@@ -131,11 +131,11 @@ void mcp_cycle_LEDS(void)
 {
 	LED_test = LED_test >> 7 | LED_test << 1;
 	spi_bytes[0] =  SPI_ADDR<<1 | MCP23X17_WRITE;
-	spi_bytes[1] = PORTA_ADDR(OLAT, SEQ_ADDR);
+	spi_bytes[1] = PORTA_ADDR(OLAT, SEQ_MODE);
 	spi_bytes[2] = LED_test;
 	spi_start(spi_bytes, spi_bytes, 3);
 
-	i2c_tx_buffer[0] = PORTA_ADDR(OLAT, SEQ_ADDR);
+	i2c_tx_buffer[0] = PORTA_ADDR(OLAT, SEQ_MODE);
 	i2c_tx_buffer[1] = LED_test;
 	add_to_msg_queue(&i2c_rb, I2C_ADDR_1, I2C_WRITE_bm, i2c_tx_buffer, 2);
 	
@@ -150,10 +150,10 @@ void mcp_cycle_LEDS(void)
 void mcp_read_inputs(void)
 {
 	spi_bytes[0] = SPI_ADDR<<1 | MCP23X17_READ;
-	spi_bytes[1] = PORTB_ADDR(INTCAP, SEQ_ADDR);
+	spi_bytes[1] = PORTB_ADDR(INTCAP, SEQ_MODE);
 	spi_start(spi_bytes, spi_bytes, 3);
 	
-	target_reg = PORTB_ADDR(GPIO, SEQ_ADDR); // INTCAP, SEQ_ADDR);
+	target_reg = PORTB_ADDR(GPIO, SEQ_MODE); // INTCAP, SEQ_MODE);
 	add_to_msg_queue(&i2c_rb, I2C_ADDR_1, I2C_WRITE_bm, &target_reg, 1);	// Select register
 	add_to_msg_queue(&i2c_rb, I2C_ADDR_1, I2C_READ_bm, &i2c_rx_buffer, 1);	// Read
 	

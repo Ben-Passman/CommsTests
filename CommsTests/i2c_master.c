@@ -197,7 +197,7 @@ static i2c_states_t I2C_M_RX_BYTE(void)
 // Need to abort or re-send start (MADDR). Write to MADDR will clear flag.
 static i2c_states_t I2C_M_ARB_LOST(void)
 {
-	return i2c_M_callback_handler(ARB_error);
+	return i2c_M_callback_handler(arb_error);
 }
 
 // BUS ERROR
@@ -294,7 +294,7 @@ void i2c_master_init()
 	i2c_fsm.event_callbacks[rx_complete] = stop_cb;
 	i2c_fsm.event_callbacks[address_NACK_error] = stop_cb;
 	i2c_fsm.event_callbacks[data_NACK_error] = stop_cb;
-	i2c_fsm.event_callbacks[ARB_error] = restart_cb;
+	i2c_fsm.event_callbacks[arb_error] = restart_cb;
 	i2c_fsm.event_callbacks[bus_error] = restart_cb;
 
 	i2c_fsm.state = I2C_IDLE;

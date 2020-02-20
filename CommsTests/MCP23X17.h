@@ -16,11 +16,11 @@ typedef enum MCP23X17_REG_enum
 	OLAT,			// Output pin latches
 } MCP23X17_REG_t;
 
-#define PORTA_ADDR(reg, mode) reg*(2-mode)
-#define PORTB_ADDR(reg, mode) reg*(2-mode)+9*mode+1
+#define SEQ_MODE 0
+#define SEP_MODE 1
 
-#define SEQ_ADDR 0
-#define SEP_ADDR 1
+#define PORTA_ADDR(reg, mode) reg*(2-mode)
+#define PORTB_ADDR(reg, mode) reg*(2-mode)+0x0F*mode+1
 
 #define MCP23X17_READ 1
 #define MCP23X17_WRITE 0

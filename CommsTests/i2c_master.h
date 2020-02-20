@@ -14,7 +14,7 @@ typedef enum I2C_events_enum
 	rx_complete,
 	address_NACK_error,
 	data_NACK_error,
-	ARB_error,
+	arb_error,
 	bus_error
 } i2c_events_t;
 

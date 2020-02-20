@@ -52,6 +52,7 @@ static void spi_m_callback_handler(spi_event_callback cb)
 			spi_m_start();
 			break;
 		case reset_spi :
+		default :
 			spi_m_reset();
 			break;
 	}
